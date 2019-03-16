@@ -2,10 +2,20 @@
   "name": "webpack-custom-runtime",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "main": "src/index.js",
+  "author": "3y3",
+  "license": "MIT",
+  "keywords": [
+    "webpack",
+    "webpack jsonp",
+    "webpack chunk error",
+    "webpack runtime",
+    "webpack plugin"
+  ],
+  "files": [
+    "src"
+  ]
 }
