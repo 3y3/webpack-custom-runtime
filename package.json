@@ -14,6 +14,12 @@
   },
   "author": "3y3",
   "license": "MIT",
+  "dependencies": {
+    "prettier": "^1.16.4",
+    "tapable": "^1.1.1"
+  },
+  "devDependencies": {
+    "diff": "^4.0.1",
     "jest": "^24.1.0",
     "memory-fs": "^0.4.1",
     "pretty-quick": "^1.10.0",

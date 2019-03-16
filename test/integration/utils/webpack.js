@@ -3,16 +3,19 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const MemoryFileSystem = require('memory-fs');
 
+const mainInputDir = path.join(__dirname, '..', 'fixtures');
+const mainOutputDir = path.join(__dirname, '..', 'fixtures', 'dist');
+
 module.exports = function(extend) {
     const config = webpackMerge({
         mode: 'development',
         devtool: false,
         entry: {
-            'main-module': path.join(__dirname, '..', 'fixtures', 'main-module'),
-            'other-module': path.join(__dirname, '..', 'fixtures', 'other-module')
+            'main-module': mainInputDir + '/main-module',
+            'other-module': mainInputDir + '/other-module'
         },
         output: {
-            path: path.join(__dirname, '..', 'fixtures', 'dist'),
+            path: mainOutputDir,
             filename: '[contenthash]-[name].js',
         },
         optimization: {
@@ -37,5 +40,5 @@ module.exports = function(extend) {
         });
     });
 
-    return { fs, result };
+    return { fs, result, mainOutputDir };
 };
