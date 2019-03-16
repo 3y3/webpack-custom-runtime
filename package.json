@@ -3,11 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest ./test/integration"
   },
   "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "peerDependencies": {
+    "webpack": ">=4.0.0"
+  },
   "author": "3y3",
   "license": "MIT",
+    "jest": "^24.1.0",
+    "memory-fs": "^0.4.1",
+    "pretty-quick": "^1.10.0",
+    "webpack": "^4.29.5",
+    "webpack-merge": "^4.2.1"
+  },
   "keywords": [
     "webpack",
     "webpack jsonp",
