@@ -37,14 +37,68 @@ exports[`check require-ensure override: runtime.js 1`] = `
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -97,51 +97,5 @@
--/******/
--/******/
+@@ -68,0 +68,3 @@
++/******/ 	function scriptBuilder(url, options) {
++/******/ 	  return document.createElement('script');
++/******/ 	}
+@@ -69,0 +72,13 @@
++/******/ 	function scriptUrlResolver(installedChunks, chunkId) {
++/******/ 	  var result = (originalUrl = jsonpScriptSrc(chunkId));
++/******/
++/******/ 	  return result;
++/******/ 	}
++/******/
++/******/ 	function scriptOptionsResolver(installedChunks, chunkId, url) {
++/******/ 	  var result = {};
++/******/
++/******/ 	  return result;
++/******/ 	}
++/******/
++/******/
+@@ -97,0 +113,13 @@
++/******/ 		var result = (function(
++/******/ 		  installedChunks,
++/******/ 		  chunkId,
++/******/ 		  scriptBuilder,
++/******/ 		  scriptUrlResolver,
++/******/ 		  scriptOptionsResolver
++/******/ 		) {
++/******/ 		  // JSONP chunk loading for javascript
++/******/ 		  var INSTALLED = 0;
++/******/ 		  var PROMISE_RESOLVE = 0;
++/******/ 		  var PROMISE_REJECT = 1;
++/******/ 		  var LOAD_PROMISE = 2;
++/******/ 		  var installedChunkData = installedChunks[chunkId];
+@@ -98,0 +127,5 @@
++/******/ 		  if (installedChunkData === INSTALLED || installedChunkData) {
++/******/ 		    return installedChunkData === INSTALLED
++/******/ 		      ? Promise.resolve()
++/******/ 		      : installedChunkData[LOAD_PROMISE];
++/******/ 		  }
+@@ -99,1 +133,15 @@
 -/******/ 		// JSONP chunk loading for javascript
--/******/
++/******/ 		  var url, options, script, error;
++/******/ 		  installedChunkData = installedChunks[chunkId] = [];
++/******/ 		  installedChunkData[LOAD_PROMISE] = new Promise(function(resolve, reject) {
++/******/ 		    installedChunkData[PROMISE_RESOLVE] = resolve;
++/******/ 		    installedChunkData[PROMISE_REJECT] = reject;
++/******/ 		  })
++/******/ 		    .catch(setError)
++/******/ 		    .then(checkScriptLoaded);
++/******/ 		  Promise.resolve()
++/******/ 		    .then(resolveUrlAndOptions)
++/******/ 		    .then(buildScript)
++/******/ 		    .then(setScript)
++/******/ 		    .then(appendScript)
++/******/ 		    .catch(installedChunkData[PROMISE_REJECT]);
++/******/ 		  return installedChunkData[LOAD_PROMISE];
+@@ -101,2 +149,3 @@
 -/******/ 		var installedChunkData = installedChunks[chunkId];
 -/******/ 		if(installedChunkData !== 0) { // 0 means \\"already installed\\".
--/******/
++/******/ 		  function checkScriptLoaded() {
++/******/ 		    var chunk = installedChunks[chunkId];
++/******/ 		    var isChunkComplete = chunk === INSTALLED; // ignore any errors if chunk is loaded
+@@ -104,9 +153,3 @@
 -/******/ 			// a Promise means \\"currently loading\\".
 -/******/ 			if(installedChunkData) {
 -/******/ 				promises.push(installedChunkData[2]);
@@ -54,18 +108,37 @@ exports[`check require-ensure override: runtime.js 1`] = `
 -/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
 -/******/ 				});
 -/******/ 				promises.push(installedChunkData[2] = promise);
--/******/
++/******/ 		    if (isChunkComplete) {
++/******/ 		      return;
++/******/ 		    }
+@@ -114,3 +157,7 @@
 -/******/ 				// start chunk loading
 -/******/ 				var script = document.createElement('script');
 -/******/ 				var onScriptComplete;
--/******/
++/******/ 		    installedChunks[chunkId] = undefined;
++/******/ 		    error = error || new Error('Failed to load resource');
++/******/ 		    error.type = error.type || 'missing';
++/******/ 		    error.request = script.src;
++/******/ 		    error.chunkId = chunkId;
++/******/ 		    throw error;
++/******/ 		  }
+@@ -118,6 +165,9 @@
 -/******/ 				script.charset = 'utf-8';
 -/******/ 				script.timeout = 120;
 -/******/ 				if (__webpack_require__.nc) {
 -/******/ 					script.setAttribute(\\"nonce\\", __webpack_require__.nc);
 -/******/ 				}
 -/******/ 				script.src = jsonpScriptSrc(chunkId);
--/******/
++/******/ 		  function buildScript() {
++/******/ 		    // scriptBuilder can be asynchronous for old school strategies like \`blob loading\`
++/******/ 		    return scriptBuilder(
++/******/ 		      url,
++/******/ 		      options,
++/******/ 		      installedChunkData[PROMISE_RESOLVE],
++/******/ 		      installedChunkData[PROMISE_REJECT]
++/******/ 		    );
++/******/ 		  }
+@@ -125,23 +175,25 @@
 -/******/ 				onScriptComplete = function (event) {
 -/******/ 					// avoid mem leaks in IE.
 -/******/ 					script.onerror = script.onload = null;
@@ -89,9 +162,29 @@ exports[`check require-ensure override: runtime.js 1`] = `
 -/******/ 				script.onerror = script.onload = onScriptComplete;
 -/******/ 				document.head.appendChild(script);
 -/******/ 			}
-+/******/ 		var result = (function() {
-+/******/ 		  // JSONP chunk loading for javascript
-+/******/ 		})(installedChunks, chunkId);
++/******/ 		  function resolveUrlAndOptions() {
++/******/ 		    url = scriptUrlResolver(installedChunks, chunkId);
++/******/ 		    options = scriptOptionsResolver(installedChunks, chunkId, url);
++/******/ 		  }
++/******/
++/******/ 		  function appendScript() {
++/******/ 		    document.getElementsByTagName('head')[0].appendChild(script);
++/******/ 		  }
++/******/
++/******/ 		  function setError(_error) {
++/******/ 		    error = _error;
++/******/ 		  }
++/******/
++/******/ 		  function setScript(_script) {
++/******/ 		    script = _script;
++/******/ 		  }
++/******/ 		})(
++/******/ 		  installedChunks,
++/******/ 		  chunkId,
++/******/ 		  scriptBuilder,
++/******/ 		  scriptUrlResolver,
++/******/ 		  scriptOptionsResolver
++/******/ 		);
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));
 "
