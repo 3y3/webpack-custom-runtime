@@ -59,3 +59,4 @@ class ScriptAttrPlugin {
 
 module.exports = ScriptAttrPlugin;
 
+ScriptAttrPlugin.Type = require('./Type');

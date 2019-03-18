@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScriptAttr(Type) should not to override script type by default: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should not to override script type by default: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should not to override script type by default: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should not to override script type by default: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should not to override script type by default: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -150,0 +150,2 @@
++/******/ 	  result.type = 'module';
++/******/
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -150,0 +150,2 @@
++/******/ 	  result.type = 'application/json';
++/******/
+"
+`;
