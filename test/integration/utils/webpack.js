@@ -16,7 +16,7 @@ module.exports = function(extend) {
         },
         output: {
             path: mainOutputDir,
-            filename: '[contenthash]-[name].js',
+            filename: '[name].js',
         },
         optimization: {
             runtimeChunk: {

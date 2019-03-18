@@ -1,74 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`check default output: 8147100b7727923b4230-other-module.js 1`] = `
-"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[\\"other-module\\"],{
-
-/***/ \\"./test/integration/fixtures/other-module.js\\":
-/*!***************************************************!*\\\\
-  !*** ./test/integration/fixtures/other-module.js ***!
-  \\\\***************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-async function run() {
-    console.log(await __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./async-submodule1 */ \\"./test/integration/fixtures/async-submodule1.js\\")));
-}
-
-run();
-
-
-/***/ })
-
-},[[\\"./test/integration/fixtures/other-module.js\\",\\"runtime\\"]]]);"
-`;
-
-exports[`check default output: a48d6dcc03f9fb246db4-1.js 1`] = `
-"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],{
-
-/***/ \\"./test/integration/fixtures/async-submodule2.js\\":
-/*!*******************************************************!*\\\\
-  !*** ./test/integration/fixtures/async-submodule2.js ***!
-  \\\\*******************************************************/
-/*! exports provided: foo */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-\\"use strict\\";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\"foo\\", function() { return foo; });
-const foo = 'foo';
-
-console.log('foo loaded!');
-
-
-/***/ })
-
-}]);"
-`;
-
-exports[`check default output: df0fd52977c32c6b10ee-main-module.js 1`] = `
-"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[\\"main-module\\"],{
-
-/***/ \\"./test/integration/fixtures/main-module.js\\":
-/*!**************************************************!*\\\\
-  !*** ./test/integration/fixtures/main-module.js ***!
-  \\\\**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-async function run() {
-    console.log(await __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./async-submodule1 */ \\"./test/integration/fixtures/async-submodule1.js\\")));
-    console.log(await __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./async-submodule2 */ \\"./test/integration/fixtures/async-submodule2.js\\")));
-}
-
-run();
-
-
-/***/ })
-
-},[[\\"./test/integration/fixtures/main-module.js\\",\\"runtime\\"]]]);"
-`;
-
-exports[`check default output: ea828996ebbeaa2d489d-0.js 1`] = `
+exports[`check default output: 0.js 1`] = `
 "(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[0],{
 
 /***/ \\"./test/integration/fixtures/async-submodule1.js\\":
@@ -91,7 +23,75 @@ console.log('foo loaded!');
 }]);"
 `;
 
-exports[`check default output: fab312a3713ee7affe57-runtime.js 1`] = `
+exports[`check default output: 1.js 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[1],{
+
+/***/ \\"./test/integration/fixtures/async-submodule2.js\\":
+/*!*******************************************************!*\\\\
+  !*** ./test/integration/fixtures/async-submodule2.js ***!
+  \\\\*******************************************************/
+/*! exports provided: foo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+\\"use strict\\";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\"foo\\", function() { return foo; });
+const foo = 'foo';
+
+console.log('foo loaded!');
+
+
+/***/ })
+
+}]);"
+`;
+
+exports[`check default output: main-module.js 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[\\"main-module\\"],{
+
+/***/ \\"./test/integration/fixtures/main-module.js\\":
+/*!**************************************************!*\\\\
+  !*** ./test/integration/fixtures/main-module.js ***!
+  \\\\**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+async function run() {
+    console.log(await __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./async-submodule1 */ \\"./test/integration/fixtures/async-submodule1.js\\")));
+    console.log(await __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./async-submodule2 */ \\"./test/integration/fixtures/async-submodule2.js\\")));
+}
+
+run();
+
+
+/***/ })
+
+},[[\\"./test/integration/fixtures/main-module.js\\",\\"runtime\\"]]]);"
+`;
+
+exports[`check default output: other-module.js 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[\\"other-module\\"],{
+
+/***/ \\"./test/integration/fixtures/other-module.js\\":
+/*!***************************************************!*\\\\
+  !*** ./test/integration/fixtures/other-module.js ***!
+  \\\\***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+async function run() {
+    console.log(await __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./async-submodule1 */ \\"./test/integration/fixtures/async-submodule1.js\\")));
+}
+
+run();
+
+
+/***/ })
+
+},[[\\"./test/integration/fixtures/other-module.js\\",\\"runtime\\"]]]);"
+`;
+
+exports[`check default output: runtime.js 1`] = `
 "/******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
 /******/ 	function webpackJsonpCallback(data) {
@@ -157,7 +157,7 @@ exports[`check default output: fab312a3713ee7affe57-runtime.js 1`] = `
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + \\"\\" + {\\"0\\":\\"ea828996ebbeaa2d489d\\",\\"1\\":\\"a48d6dcc03f9fb246db4\\"}[chunkId] + \\"-\\" + ({}[chunkId]||chunkId) + \\".js\\"
+/******/ 		return __webpack_require__.p + \\"\\" + ({}[chunkId]||chunkId) + \\".js\\"
 /******/ 	}
 /******/
 /******/ 	// The require function

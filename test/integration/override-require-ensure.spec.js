@@ -8,17 +8,8 @@ const WebpackCustomRuntime = require('../../').CustomRuntimePlugin;
 const mainOutputDir = path.join(__dirname, 'fixtures', 'dist');
 
 test('check require-ensure override', async () => {
-    const base = webpack({
-        output: {
-            path: mainOutputDir,
-            filename: '[name].js',
-        }
-    });
+    const base = webpack();
     const curr = webpack({
-        output: {
-            path: mainOutputDir,
-            filename: '[name].js',
-        },
         plugins: [
             new WebpackCustomRuntime()
         ]

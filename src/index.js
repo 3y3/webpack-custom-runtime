@@ -29,4 +29,7 @@ class CustomRuntimePlugin {
         Definitions.requireEnsure(mainTemplate, requireEnsureVars);
     }
 }
+
+CustomRuntimePlugin.ExposeRequireEnsureRuntime = require('./plugins/ExposeRequireEnsureRuntime');
+
 module.exports.CustomRuntimePlugin = CustomRuntimePlugin;
