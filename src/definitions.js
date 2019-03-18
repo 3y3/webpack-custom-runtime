@@ -1,12 +1,12 @@
 'use strict';
 
+const pureScriptBuilder = require('./templates/pure-script-builder');
 const pureRequireEnsure = require('./templates/pure-require-ensure');
 const zip = require('./utils/array-to-hash');
 const format = require('./utils/format-code');
 const { pluginName, expressions } = require('./config');
 
 const {
-    scriptBuilder,
     scriptUrlResolver,
     scriptOptionsResolver,
     scriptLoadHandler,
@@ -16,9 +16,7 @@ const {
 module.exports = {
     scriptBuilder(mainTemplate) {
         mainTemplate.hooks.scriptBuilder.tap(pluginName, () => {
-            return format(`function ${scriptBuilder}(url, options) {
-                return document.createElement('script');
-            }`);
+            return format(pureScriptBuilder.toString());
         });
     },
 
