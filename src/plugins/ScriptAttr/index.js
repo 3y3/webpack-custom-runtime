@@ -62,3 +62,4 @@ module.exports = ScriptAttrPlugin;
 ScriptAttrPlugin.Type = require('./Type');
 ScriptAttrPlugin.Timeout = require('./Timeout');
 ScriptAttrPlugin.Nonce = require('./Nonce');
+ScriptAttrPlugin.CrossOrigin = require('./CrossOrigin');
