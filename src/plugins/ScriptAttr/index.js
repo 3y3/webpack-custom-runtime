@@ -60,3 +60,4 @@ class ScriptAttrPlugin {
 module.exports = ScriptAttrPlugin;
 
 ScriptAttrPlugin.Type = require('./Type');
+ScriptAttrPlugin.Timeout = require('./Timeout');
