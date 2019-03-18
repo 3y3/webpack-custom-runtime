@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -150,0 +150,4 @@
++/******/ 	  if (Ya.nonce) {
++/******/ 	    result.nonce = Ya.nonce;
++/******/ 	  }
++/******/
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -150,0 +150,4 @@
++/******/ 	  if (Ya.nonce) {
++/******/ 	    result.nonce = Ya.nonce;
++/******/ 	  }
++/******/
+"
+`;

@@ -2,6 +2,7 @@
 
 const pluginName = 'ExposeRequireEnsureRuntimePlugin';
 const zip = require('../utils/array-to-hash');
+const replaceEnv = require('../utils/replace-env');
 const { requireEnsureVars } = require('../config');
 
 const exposableVars = zip(requireEnsureVars);
@@ -100,11 +101,9 @@ class ExposeRequireEnsureRuntimePlugin {
     }
 
     _getRuntimeExpression(mainTemplate) {
-        const env = {
+        return replaceEnv(this.options.exposeTo, {
             requireFn: mainTemplate.requireFn
-        };
-
-        return this.options.exposeTo.replace(/{(.*?)}/g, (_, match) => env[match] || `{${match}}`);
+        });
     }
 
     _exposeVariable(mainTemplate, from, to) {
