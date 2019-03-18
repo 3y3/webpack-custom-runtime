@@ -31,5 +31,6 @@ class CustomRuntimePlugin {
 }
 
 CustomRuntimePlugin.ExposeRequireEnsureRuntime = require('./plugins/ExposeRequireEnsureRuntime');
+CustomRuntimePlugin.ScriptAttr = require('./plugins/ScriptAttr');
 
 module.exports.CustomRuntimePlugin = CustomRuntimePlugin;
