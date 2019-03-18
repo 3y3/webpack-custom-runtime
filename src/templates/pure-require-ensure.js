@@ -11,7 +11,9 @@ module.exports = function(
     chunkId,
     scriptBuilder,
     scriptUrlResolver,
-    scriptOptionsResolver
+    scriptOptionsResolver,
+    scriptLoadHandler,
+    scriptErrorHandler
 ) {
     // JSONP chunk loading for javascript
 
@@ -36,7 +38,9 @@ module.exports = function(
         installedChunkData[PROMISE_REJECT] = reject;
     })
     .catch(setError)
-    .then(checkScriptLoaded);
+    .then(checkScriptLoaded)
+    .then(onLoad)
+    .catch(onError);
 
     Promise.resolve()
         .then(resolveUrlAndOptions)
@@ -91,5 +95,13 @@ module.exports = function(
 
     function setScript(_script) {
         script = _script;
+    }
+
+    function onLoad() {
+        return scriptLoadHandler(installedChunks, chunkId);
+    }
+
+    function onError(error) {
+        return scriptErrorHandler(installedChunks, chunkId, error);
     }
 };

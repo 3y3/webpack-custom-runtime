@@ -41,7 +41,7 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 	function scriptBuilder(url, options) {
 +/******/ 	  return document.createElement('script');
 +/******/ 	}
-@@ -69,0 +72,13 @@
+@@ -69,0 +72,25 @@
 +/******/ 	function scriptUrlResolver(installedChunks, chunkId) {
 +/******/ 	  var result = (originalUrl = jsonpScriptSrc(chunkId));
 +/******/
@@ -54,14 +54,28 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 	  return result;
 +/******/ 	}
 +/******/
++/******/ 	function scriptLoadHandler(installedChunks, chunkId) {
++/******/ 	  var result = null;
 +/******/
-@@ -97,0 +113,13 @@
++/******/ 	  return Promise.resolve(result);
++/******/ 	}
++/******/
++/******/ 	function scriptErrorHandler(installedChunks, chunkId, originalError) {
++/******/ 	  var result = originalError;
++/******/
++/******/ 	  return Promise.reject(result);
++/******/ 	}
++/******/
++/******/
+@@ -97,0 +125,15 @@
 +/******/ 		var result = (function(
 +/******/ 		  installedChunks,
 +/******/ 		  chunkId,
 +/******/ 		  scriptBuilder,
 +/******/ 		  scriptUrlResolver,
-+/******/ 		  scriptOptionsResolver
++/******/ 		  scriptOptionsResolver,
++/******/ 		  scriptLoadHandler,
++/******/ 		  scriptErrorHandler
 +/******/ 		) {
 +/******/ 		  // JSONP chunk loading for javascript
 +/******/ 		  var INSTALLED = 0;
@@ -69,13 +83,13 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 		  var PROMISE_REJECT = 1;
 +/******/ 		  var LOAD_PROMISE = 2;
 +/******/ 		  var installedChunkData = installedChunks[chunkId];
-@@ -98,0 +127,5 @@
+@@ -98,0 +141,5 @@
 +/******/ 		  if (installedChunkData === INSTALLED || installedChunkData) {
 +/******/ 		    return installedChunkData === INSTALLED
 +/******/ 		      ? Promise.resolve()
 +/******/ 		      : installedChunkData[LOAD_PROMISE];
 +/******/ 		  }
-@@ -99,1 +133,15 @@
+@@ -99,1 +147,17 @@
 -/******/ 		// JSONP chunk loading for javascript
 +/******/ 		  var url, options, script, error;
 +/******/ 		  installedChunkData = installedChunks[chunkId] = [];
@@ -84,7 +98,9 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 		    installedChunkData[PROMISE_REJECT] = reject;
 +/******/ 		  })
 +/******/ 		    .catch(setError)
-+/******/ 		    .then(checkScriptLoaded);
++/******/ 		    .then(checkScriptLoaded)
++/******/ 		    .then(onLoad)
++/******/ 		    .catch(onError);
 +/******/ 		  Promise.resolve()
 +/******/ 		    .then(resolveUrlAndOptions)
 +/******/ 		    .then(buildScript)
@@ -92,13 +108,13 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 		    .then(appendScript)
 +/******/ 		    .catch(installedChunkData[PROMISE_REJECT]);
 +/******/ 		  return installedChunkData[LOAD_PROMISE];
-@@ -101,2 +149,3 @@
+@@ -101,2 +165,3 @@
 -/******/ 		var installedChunkData = installedChunks[chunkId];
 -/******/ 		if(installedChunkData !== 0) { // 0 means \\"already installed\\".
 +/******/ 		  function checkScriptLoaded() {
 +/******/ 		    var chunk = installedChunks[chunkId];
 +/******/ 		    var isChunkComplete = chunk === INSTALLED; // ignore any errors if chunk is loaded
-@@ -104,9 +153,3 @@
+@@ -104,9 +169,3 @@
 -/******/ 			// a Promise means \\"currently loading\\".
 -/******/ 			if(installedChunkData) {
 -/******/ 				promises.push(installedChunkData[2]);
@@ -111,7 +127,7 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 		    if (isChunkComplete) {
 +/******/ 		      return;
 +/******/ 		    }
-@@ -114,3 +157,7 @@
+@@ -114,3 +173,7 @@
 -/******/ 				// start chunk loading
 -/******/ 				var script = document.createElement('script');
 -/******/ 				var onScriptComplete;
@@ -122,7 +138,7 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 		    error.chunkId = chunkId;
 +/******/ 		    throw error;
 +/******/ 		  }
-@@ -118,6 +165,9 @@
+@@ -118,6 +181,9 @@
 -/******/ 				script.charset = 'utf-8';
 -/******/ 				script.timeout = 120;
 -/******/ 				if (__webpack_require__.nc) {
@@ -138,7 +154,7 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 		      installedChunkData[PROMISE_REJECT]
 +/******/ 		    );
 +/******/ 		  }
-@@ -125,23 +175,25 @@
+@@ -125,23 +191,35 @@
 -/******/ 				onScriptComplete = function (event) {
 -/******/ 					// avoid mem leaks in IE.
 -/******/ 					script.onerror = script.onload = null;
@@ -178,12 +194,22 @@ exports[`check require-ensure override: runtime.js 1`] = `
 +/******/ 		  function setScript(_script) {
 +/******/ 		    script = _script;
 +/******/ 		  }
++/******/
++/******/ 		  function onLoad() {
++/******/ 		    return scriptLoadHandler(installedChunks, chunkId);
++/******/ 		  }
++/******/
++/******/ 		  function onError(error) {
++/******/ 		    return scriptErrorHandler(installedChunks, chunkId, error);
++/******/ 		  }
 +/******/ 		})(
 +/******/ 		  installedChunks,
 +/******/ 		  chunkId,
 +/******/ 		  scriptBuilder,
 +/******/ 		  scriptUrlResolver,
-+/******/ 		  scriptOptionsResolver
++/******/ 		  scriptOptionsResolver,
++/******/ 		  scriptLoadHandler,
++/******/ 		  scriptErrorHandler
 +/******/ 		);
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));

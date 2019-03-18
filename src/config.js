@@ -6,6 +6,8 @@ const requireEnsureVars = [
     'scriptBuilder',
     'scriptUrlResolver',
     'scriptOptionsResolver',
+    'scriptLoadHandler',
+    'scriptErrorHandler'
 ];
 
 module.exports = {
@@ -16,6 +18,7 @@ module.exports = {
         chunkId: 'chunkId',
         result: 'result',
         url: 'url',
+        originalError: 'originalError',
         originalUrl: 'originalUrl'
     }, zip(requireEnsureVars)),
 
@@ -23,9 +26,13 @@ module.exports = {
         scriptBuilder: [ 'source', 'chunk', 'hash' ],
         scriptUrlResolver: [ 'source', 'chunk', 'hash' ],
         scriptOptionsResolver: [ 'source', 'chunk', 'hash' ],
+        scriptLoadHandler: [ 'source', 'chunk', 'hash' ],
+        scriptErrorHandler: [ 'source', 'chunk', 'hash' ],
 
         scriptUrlResolverStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
         scriptOptionsResolverStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
+        scriptLoadHandlerStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
+        scriptErrorHandlerStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
         requireEnsureVars: [ 'source', 'chunk', 'hash', 'expressions' ],
     },
 

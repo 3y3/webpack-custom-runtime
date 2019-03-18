@@ -4,10 +4,13 @@ const pureRequireEnsure = require('./templates/pure-require-ensure');
 const zip = require('./utils/array-to-hash');
 const format = require('./utils/format-code');
 const { pluginName, expressions } = require('./config');
+
 const {
     scriptBuilder,
     scriptUrlResolver,
     scriptOptionsResolver,
+    scriptLoadHandler,
+    scriptErrorHandler
 } = expressions;
 
 module.exports = {
@@ -53,6 +56,44 @@ module.exports = {
                 ${strategies.join('\n')}
 
                 return ${result};         
+            }`);
+        });
+    },
+
+    scriptLoadHandler(mainTemplate) {
+        const { installedChunks, chunkId, result } = expressions;
+
+        mainTemplate.hooks.scriptLoadHandler.tap(pluginName, (source, chunk, hash) => {
+            const strategies = mainTemplate.hooks.scriptLoadHandlerStrategy.call(
+                [], chunk, hash,
+                { installedChunks, chunkId, result }
+            );
+
+            return format(`function ${scriptLoadHandler}(${installedChunks}, ${chunkId}) {
+                var ${result} = null;
+                
+                ${strategies.join('\n')}
+
+                return Promise.resolve(${result});         
+            }`);
+        });
+    },
+
+    scriptErrorHandler(mainTemplate) {
+        const { installedChunks, chunkId, originalError, result } = expressions;
+
+        mainTemplate.hooks.scriptErrorHandler.tap(pluginName, (source, chunk, hash) => {
+            const strategies = mainTemplate.hooks.scriptErrorHandlerStrategy.call(
+                [], chunk, hash,
+                { installedChunks, chunkId, originalError, result }
+            );
+
+            return format(`function ${scriptErrorHandler}(${installedChunks}, ${chunkId}, ${originalError}) {
+                var ${result} = ${originalError};
+                
+                ${strategies.join('\n')}
+
+                return Promise.reject(${result});         
             }`);
         });
     },
