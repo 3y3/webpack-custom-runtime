@@ -6,12 +6,25 @@ const Definitions = require('./definitions');
 const { pluginName, hooks, requireEnsureVars } = require('./config');
 
 class CustomRuntimePlugin {
+    constructor(options = {}) {
+        this.options = Object.assign({
+            behavior: 'default'
+        }, options);
+    }
+
     apply(compiler) {
         compiler.hooks.compilation.tap(pluginName, compilation => {
             const { mainTemplate } = compilation;
             this.registerHooks(mainTemplate, hooks);
             this.redefineRequireEnsure(mainTemplate, requireEnsureVars);
         });
+
+        if (this.options.behavior === 'default') {
+            new CustomRuntimePlugin.ScriptAttr.Type().apply(compiler);
+            new CustomRuntimePlugin.ScriptAttr.Timeout().apply(compiler);
+            new CustomRuntimePlugin.ScriptAttr.Nonce().apply(compiler);
+            new CustomRuntimePlugin.ScriptAttr.CrossOrigin().apply(compiler);
+        }
     }
 
     registerHooks(mainTemplate, hooks = {}) {

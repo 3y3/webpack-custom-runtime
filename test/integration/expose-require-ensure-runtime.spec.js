@@ -13,12 +13,12 @@ describe('ExposeRequireEnsureRuntimePlugin', function() {
         test(name, async function() {
             const base = webpack({
                 plugins: [
-                    new WebpackCustomRuntime(),
+                    new WebpackCustomRuntime({ behavior: '' }),
                 ]
             });
             const curr = webpack({
                 plugins: [
-                    new WebpackCustomRuntime(),
+                    new WebpackCustomRuntime({ behavior: '' }),
                     new WebpackCustomRuntime.ExposeRequireEnsureRuntime(options),
                 ]
             });

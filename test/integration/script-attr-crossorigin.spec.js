@@ -13,12 +13,12 @@ describe('ScriptAttr(CrossOrigin)', function() {
         test(name, async function() {
             const base = webpack({
                 plugins: [
-                    new WebpackCustomRuntime(),
+                    new WebpackCustomRuntime({ behavior: '' }),
                 ]
             });
             const curr = webpack(Object.assign({
                 plugins: [
-                    new WebpackCustomRuntime(),
+                    new WebpackCustomRuntime({ behavior: '' }),
                     new WebpackCustomRuntime.ScriptAttr.CrossOrigin(options),
                 ]
             }, config));
