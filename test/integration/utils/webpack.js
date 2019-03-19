@@ -40,5 +40,5 @@ module.exports = function(extend) {
         });
     });
 
-    return { fs, result, mainOutputDir };
+    return { fs, result };
 };

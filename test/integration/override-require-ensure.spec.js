@@ -1,17 +1,15 @@
 'use strict';
 
-const path = require('path');
-const diff = require('diff');
 const webpack = require('./utils/webpack');
+const checkFsDiff = require('./utils/check-fs-diff');
 const WebpackCustomRuntime = require('../../').CustomRuntimePlugin;
 
-const mainOutputDir = path.join(__dirname, 'fixtures', 'dist');
+const base = webpack();
 
-describe.only('require-ensure override', function() {
+describe('require-ensure override', function() {
 
     function cit(name, options, config) {
         test(name, async () => {
-            const base = webpack();
             const curr = webpack(Object.assign({
                 plugins: [
                     new WebpackCustomRuntime(options)
@@ -20,29 +18,12 @@ describe.only('require-ensure override', function() {
 
             await Promise.all([ base.result, curr.result ]);
 
-            const baseDir = base.fs.readdirSync(mainOutputDir);
-            const currDir = curr.fs.readdirSync(mainOutputDir);
-
-            expect(baseDir).toEqual(currDir);
-
-            currDir.forEach((file) => {
-                const linesDiff = diff.createTwoFilesPatch(
-                    file, file,
-                    base.fs.readFileSync(mainOutputDir + '/' + file).toString(),
-                    curr.fs.readFileSync(mainOutputDir + '/' + file).toString(),
-                    '', '',
-                    { context: 0 }
-                );
-
-                expect(linesDiff).toMatchSnapshot(file);
-            });
+            checkFsDiff(base, curr);
         });
     }
 
     cit('should implement default webpack behavior', {}, {
         output: {
-            path: mainOutputDir,
-            filename: '[name].js',
             jsonpScriptType: 'module',
             chunkLoadTimeout: 60000,
             crossOriginLoading: 'anonymous',
