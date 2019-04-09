@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScriptAttr(Integrity) should not to enable script integrity by default: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Integrity) should not to enable script integrity by default: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Integrity) should not to enable script integrity by default: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Integrity) should not to enable script integrity by default: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Integrity) should not to enable script integrity by default: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -150,0 +150,4 @@
++/******/ 	  if (integrityHash[chunkId]) {
++/******/ 	    result.integrity = integrityHash[chunkId];
++/******/ 	  }
++/******/
+@@ -165,0 +169,1 @@
++/******/ 	var integrityHash = {\\"0\\":\\"sha512-67QztUKPB1YridVUZbc9nLvOiXRnhatdPgXmhxhPUznijWDCIHU4/9/+MgM1pFaDxfLyCKLUPXmpdekPIiRa1w==\\",\\"1\\":\\"sha512-4AUMxK+75zuRGtuPNZjBlx4jkBShSpCudhXgvNv8diJ5uRdbGygbFetWB0cX/DahKCDlRTld07LkpXwdXCUqWA==\\"};
+"
+`;
