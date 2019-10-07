@@ -86,12 +86,30 @@ module.exports = {
                 { installedChunks, chunkId, originalError, result }
             );
 
-            return format(`function ${scriptErrorHandler}(${installedChunks}, ${chunkId}, ${originalError}) {
-                var ${result} = ${originalError};
-                
-                ${strategies.join('\n')}
+            const wrappedStrategies = strategies.map((strategy) => {
+                if (typeof strategy === 'function') {
+                    return strategy.toString();
+                } else {
+                    return `function(${installedChunks}, ${chunkId}, ${originalError}, ${result}) {${strategy}}`;
+                }
+            });
 
-                return Promise.reject(${result});         
+            const strategyProcessor = `[${wrappedStrategies.join(',')}]
+                .reduce(function(promise, strategy) {
+                    return promise.then(function(${result}) {
+                        return strategy(${installedChunks}, ${chunkId}, ${originalError}, ${result});
+                    });
+                }, Promise.resolve(${originalError})).then(function(${result}) {
+                    return ${result}
+                        ? Promise.reject(${result})
+                        : Promise.resolve();
+                })`;
+
+            return format(`function ${scriptErrorHandler}(${installedChunks}, ${chunkId}, ${originalError}) {
+                return ${strategies.length
+                ? strategyProcessor
+                : `Promise.reject(${originalError})`
+            };
             }`);
         });
     },

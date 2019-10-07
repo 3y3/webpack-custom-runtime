@@ -42,7 +42,7 @@ exports[`ScriptAttr(Integrity) should not to enable script integrity by default:
 +/******/ 	    result.integrity = integrityHash[chunkId];
 +/******/ 	  }
 +/******/
-@@ -166,0 +170,1 @@
+@@ -164,0 +168,1 @@
 +/******/ 	var integrityHash = {\\"0\\":\\"sha512-67QztUKPB1YridVUZbc9nLvOiXRnhatdPgXmhxhPUznijWDCIHU4/9/+MgM1pFaDxfLyCKLUPXmpdekPIiRa1w==\\",\\"1\\":\\"sha512-4AUMxK+75zuRGtuPNZjBlx4jkBShSpCudhXgvNv8diJ5uRdbGygbFetWB0cX/DahKCDlRTld07LkpXwdXCUqWA==\\"};
 "
 `;
