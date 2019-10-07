@@ -31,6 +31,7 @@ module.exports = function(
     }
 
     var url, options, script, error;
+    var currentStackError = new Error(); // create error before stack unwound to get useful stacktrace later
 
     installedChunkData = installedChunks[chunkId] = [];
     installedChunkData[LOAD_PROMISE] = new Promise(function(resolve, reject) {
@@ -62,9 +63,13 @@ module.exports = function(
 
         installedChunks[chunkId] = undefined;
 
-        error = error || new Error('Failed to load resource');
+        error = error || currentStackError;
         error.type = error.type || 'missing';
+        error.name = 'ChunkLoadError';
+        error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + error.type + ': ' + script.src + ')';
         error.request = script.src;
+
+        // Extra fields
         error.chunkId = chunkId;
 
         throw error;

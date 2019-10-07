@@ -37,7 +37,7 @@ exports[`ScriptAttr(Timeout) should not to override script timeout by default: r
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -150,0 +150,2 @@
+@@ -151,0 +151,2 @@
 +/******/ 	  result.timeout = 120;
 +/******/
 "
@@ -80,7 +80,7 @@ exports[`ScriptAttr(Timeout) should override script timeout from options: runtim
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -150,0 +150,2 @@
+@@ -151,0 +151,2 @@
 +/******/ 	  result.timeout = 50;
 +/******/
 "
@@ -123,7 +123,7 @@ exports[`ScriptAttr(Timeout) should override script type from config: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -150,0 +150,2 @@
+@@ -151,0 +151,2 @@
 +/******/ 	  result.timeout = 60;
 +/******/
 "

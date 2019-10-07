@@ -77,7 +77,7 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config:
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -150,0 +150,4 @@
+@@ -151,0 +151,4 @@
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'anonymous';
 +/******/ 	  }
@@ -122,7 +122,7 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -150,0 +150,4 @@
+@@ -151,0 +151,4 @@
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'with-credentials';
 +/******/ 	  }

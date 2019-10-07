@@ -77,7 +77,7 @@ exports[`ScriptAttr(Type) should override script type from config: runtime.js 1`
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -150,0 +150,2 @@
+@@ -151,0 +151,2 @@
 +/******/ 	  result.type = 'module';
 +/******/
 "
@@ -120,7 +120,7 @@ exports[`ScriptAttr(Type) should override script type from options: runtime.js 1
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -150,0 +150,2 @@
+@@ -151,0 +151,2 @@
 +/******/ 	  result.type = 'application/json';
 +/******/
 "
