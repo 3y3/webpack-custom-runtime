@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RetryOnError should be disabled on \`enabled: false\`: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`RetryOnError should be disabled on \`enabled: false\`: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`RetryOnError should be disabled on \`enabled: false\`: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`RetryOnError should be disabled on \`enabled: false\`: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`RetryOnError should be disabled on \`enabled: false\`: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+"
+`;
+
+exports[`RetryOnError should configure retry: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`RetryOnError should configure retry: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`RetryOnError should configure retry: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`RetryOnError should configure retry: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`RetryOnError should configure retry: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -161,1 +161,21 @@
+-/******/ 	  return Promise.reject(originalError);
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, originalError, result) {
++/******/ 	      var retries = RetryOnError.cache[chunkId] || 0;
++/******/
++/******/ 	      if (retries >= RetryOnError.max) {
++/******/ 	        return result;
++/******/ 	      }
++/******/
++/******/ 	      RetryOnError.cache[chunkId] = retries + 1;
++/******/
++/******/ 	      return __webpack_require__.e(chunkId).then(function() {});
++/******/ 	    }
++/******/ 	  ]
++/******/ 	    .reduce(function(promise, strategy) {
++/******/ 	      return promise.then(function(result) {
++/******/ 	        return strategy(installedChunks, chunkId, originalError, result);
++/******/ 	      });
++/******/ 	    }, Promise.resolve(originalError))
++/******/ 	    .then(function(result) {
++/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
++/******/ 	    });
+@@ -164,0 +184,1 @@
++/******/ 	var RetryOnError = { max: (2 || 1), cache: {} };
+"
+`;
+
+exports[`RetryOnError should setup default retry: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`RetryOnError should setup default retry: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`RetryOnError should setup default retry: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`RetryOnError should setup default retry: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`RetryOnError should setup default retry: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -161,1 +161,21 @@
+-/******/ 	  return Promise.reject(originalError);
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, originalError, result) {
++/******/ 	      var retries = RetryOnError.cache[chunkId] || 0;
++/******/
++/******/ 	      if (retries >= RetryOnError.max) {
++/******/ 	        return result;
++/******/ 	      }
++/******/
++/******/ 	      RetryOnError.cache[chunkId] = retries + 1;
++/******/
++/******/ 	      return __webpack_require__.e(chunkId).then(function() {});
++/******/ 	    }
++/******/ 	  ]
++/******/ 	    .reduce(function(promise, strategy) {
++/******/ 	      return promise.then(function(result) {
++/******/ 	        return strategy(installedChunks, chunkId, originalError, result);
++/******/ 	      });
++/******/ 	    }, Promise.resolve(originalError))
++/******/ 	    .then(function(result) {
++/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
++/******/ 	    });
+@@ -164,0 +184,1 @@
++/******/ 	var RetryOnError = { max: (1 || 1), cache: {} };
+"
+`;

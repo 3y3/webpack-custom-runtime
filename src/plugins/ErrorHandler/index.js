@@ -14,3 +14,5 @@ class ErrorHandlerPlugin extends BasePlugin {
 }
 
 module.exports = ErrorHandlerPlugin;
+
+ErrorHandlerPlugin.RetryOnError = require('./RetryOnError');
