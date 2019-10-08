@@ -15,6 +15,9 @@ class CustomRuntimePlugin {
     apply(compiler) {
         compiler.hooks.compilation.tap(pluginName, compilation => {
             const { mainTemplate } = compilation;
+            this.mutePlugins(mainTemplate.hooks.requireEnsure, [
+                'JsonpMainTemplatePlugin load'
+            ]);
             this.registerHooks(mainTemplate, hooks);
             this.redefineRequireEnsure(mainTemplate, requireEnsureVars);
         });
@@ -25,6 +28,20 @@ class CustomRuntimePlugin {
             new CustomRuntimePlugin.ScriptAttr.Nonce().apply(compiler);
             new CustomRuntimePlugin.ScriptAttr.CrossOrigin().apply(compiler);
         }
+    }
+
+    mutePlugins(hook, plugins) {
+        hook.intercept({
+            register: (info) => {
+                if (plugins.indexOf(info.name) === -1) {
+                    return info;
+                }
+
+                return Object.assign({}, info, {
+                    fn: () => {}
+                });
+            }
+        });
     }
 
     registerHooks(mainTemplate, hooks = {}) {
