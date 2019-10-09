@@ -37,10 +37,13 @@ exports[`require-ensure override should implement default webpack behavior: runt
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -69,0 +69,2 @@
+@@ -55,1 +55,1 @@
+-/******/
++/******/ 					link.crossOrigin = \\"anonymous\\";
+@@ -86,0 +86,2 @@
 +/******/ 	function scriptUrlResolver(installedChunks, chunkId, mode) {
 +/******/ 	  var result = (originalUrl = jsonpScriptSrc(chunkId));
-@@ -70,0 +72,105 @@
+@@ -87,0 +89,105 @@
 +/******/ 	  mode = mode || 'load';
 +/******/
 +/******/ 	  return result;
@@ -146,22 +149,21 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	}
 +/******/
 +/******/
-@@ -118,1 +225,1 @@
+@@ -135,1 +242,1 @@
 -/******/
 +/******/ 				script.type = \\"module\\";
-@@ -120,1 +227,1 @@
+@@ -137,1 +244,1 @@
 -/******/ 				script.timeout = 120;
 +/******/ 				script.timeout = 60;
-@@ -125,1 +232,3 @@
+@@ -142,1 +249,3 @@
 -/******/
 +/******/ 				if (script.src.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 					script.crossOrigin = \\"anonymous\\";
 +/******/ 				}
-@@ -148,1 +257,1 @@
+@@ -165,1 +274,1 @@
 -/******/ 				}, 120000);
 +/******/ 				}, 60000);
-@@ -153,0 +262,117 @@
-+/******/
+@@ -171,0 +280,118 @@
 +/******/ 		var result = (function(
 +/******/ 		  installedChunks,
 +/******/ 		  chunkId,
@@ -278,6 +280,39 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));
 +/******/ 		}
++/******/
++/******/
+@@ -185,1 +412,1 @@
+-/******/
++/******/ 					link.type = \\"module\\";
+@@ -193,0 +420,3 @@
++/******/ 					if (link.href.indexOf(window.location.origin + '/') !== 0) {
++/******/ 						link.crossOrigin = \\"anonymous\\";
++/******/ 					}
+"
+`;
+
+exports[`require-ensure override should implement default webpack behavior: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`require-ensure override should implement default webpack behavior: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`require-ensure override should implement default webpack behavior: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;
 
@@ -318,10 +353,10 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -69,0 +69,2 @@
+@@ -86,0 +86,2 @@
 +/******/ 	function scriptUrlResolver(installedChunks, chunkId, mode) {
 +/******/ 	  var result = (originalUrl = jsonpScriptSrc(chunkId));
-@@ -70,0 +72,97 @@
+@@ -87,0 +89,97 @@
 +/******/ 	  mode = mode || 'load';
 +/******/
 +/******/ 	  return result;
@@ -419,8 +454,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	}
 +/******/
 +/******/
-@@ -153,0 +252,117 @@
-+/******/
+@@ -171,0 +270,118 @@
 +/******/ 		var result = (function(
 +/******/ 		  installedChunks,
 +/******/ 		  chunkId,
@@ -537,5 +571,31 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));
 +/******/ 		}
++/******/
++/******/
+"
+`;
+
+exports[`require-ensure override should skip defaults on custom behavior: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`require-ensure override should skip defaults on custom behavior: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`require-ensure override should skip defaults on custom behavior: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;

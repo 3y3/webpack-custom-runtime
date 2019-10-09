@@ -40,6 +40,30 @@ exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder
 "
 `;
 
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should not to override script nonce with empty holder: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
+"
+`;
+
 exports[`ScriptAttr(Nonce) should override script nonce by default: 0.js 1`] = `
 "Index: 0.js
 ===================================================================
@@ -77,10 +101,34 @@ exports[`ScriptAttr(Nonce) should override script nonce by default: runtime.js 1
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -81,0 +81,3 @@
+@@ -98,0 +98,3 @@
 +/******/ 	  if (Ya.nonce) {
 +/******/ 	    result.nonce = Ya.nonce;
 +/******/ 	  }
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce by default: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;
 
@@ -121,9 +169,33 @@ exports[`ScriptAttr(Nonce) should override script nonce from custom holder: runt
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -81,0 +81,3 @@
+@@ -98,0 +98,3 @@
 +/******/ 	  if (Ya.nonce) {
 +/******/ 	    result.nonce = Ya.nonce;
 +/******/ 	  }
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(Nonce) should override script nonce from custom holder: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;

@@ -40,6 +40,30 @@ exports[`ScriptAttr(Type) should not to override script type by default: runtime
 "
 `;
 
+exports[`ScriptAttr(Type) should not to override script type by default: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should not to override script type by default: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should not to override script type by default: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
+"
+`;
+
 exports[`ScriptAttr(Type) should override script type from config: 0.js 1`] = `
 "Index: 0.js
 ===================================================================
@@ -77,11 +101,38 @@ exports[`ScriptAttr(Type) should override script type from config: runtime.js 1`
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -81,0 +81,1 @@
+@@ -98,0 +98,1 @@
 +/******/ 	  result.type = 'module';
-@@ -217,1 +218,1 @@
+@@ -234,1 +235,1 @@
 -/******/
 +/******/ 				script.type = \\"module\\";
+@@ -402,1 +403,1 @@
+-/******/
++/******/ 					link.type = \\"module\\";
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from config: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;
 
@@ -122,7 +173,31 @@ exports[`ScriptAttr(Type) should override script type from options: runtime.js 1
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -81,0 +81,1 @@
+@@ -98,0 +98,1 @@
 +/******/ 	  result.type = 'application/json';
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(Type) should override script type from options: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;

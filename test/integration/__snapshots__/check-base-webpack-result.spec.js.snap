@@ -59,6 +59,8 @@ exports[`check default output: main-module.js 1`] = `
 async function run() {
     console.log(await __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./async-submodule1 */ \\"./test/integration/fixtures/async-submodule1.js\\")));
     console.log(await __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./async-submodule2 */ \\"./test/integration/fixtures/async-submodule2.js\\")));
+    console.log(await __webpack_require__.e(/*! import() | test1 */ \\"test1\\").then(__webpack_require__.bind(null, /*! ./async-submodule3 */ \\"./test/integration/fixtures/async-submodule3.js\\")));
+    console.log(await __webpack_require__.e(/*! import() | test2 */ \\"test2\\").then(__webpack_require__.bind(null, /*! ./async-submodule4 */ \\"./test/integration/fixtures/async-submodule4.js\\")));
 }
 
 run();
@@ -66,7 +68,7 @@ run();
 
 /***/ })
 
-},[[\\"./test/integration/fixtures/main-module.js\\",\\"runtime\\"]]]);"
+},[[\\"./test/integration/fixtures/main-module.js\\",\\"runtime\\"]],[\\"test1\\"]]);"
 `;
 
 exports[`check default output: other-module.js 1`] = `
@@ -98,7 +100,7 @@ exports[`check default output: runtime.js 1`] = `
 /******/ 		var chunkIds = data[0];
 /******/ 		var moreModules = data[1];
 /******/ 		var executeModules = data[2];
-/******/
+/******/ 		var prefetchChunks = data[3] || [];
 /******/ 		// add \\"moreModules\\" to the modules object,
 /******/ 		// then flag all \\"chunkIds\\" as loaded and fire callback
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
@@ -115,7 +117,7 @@ exports[`check default output: runtime.js 1`] = `
 /******/ 			}
 /******/ 		}
 /******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
-/******/
+/******/ 		deferredPrefetch.push.apply(deferredPrefetch, prefetchChunks);
 /******/ 		while(resolves.length) {
 /******/ 			resolves.shift()();
 /******/ 		}
@@ -140,7 +142,24 @@ exports[`check default output: runtime.js 1`] = `
 /******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
 /******/ 			}
 /******/ 		}
+/******/ 		if(deferredModules.length === 0) {
+/******/ 			// chunk prefetching for javascript
+/******/ 			deferredPrefetch.forEach(function(chunkId) {
+/******/ 				if(installedChunks[chunkId] === undefined) {
+/******/ 					installedChunks[chunkId] = null;
+/******/ 					var link = document.createElement('link');
 /******/
+/******/ 					if (__webpack_require__.nc) {
+/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);
+/******/ 					}
+/******/ 					link.rel = \\"prefetch\\";
+/******/ 					link.as = \\"script\\";
+/******/ 					link.href = jsonpScriptSrc(chunkId);
+/******/ 					document.head.appendChild(link);
+/******/ 				}
+/******/ 			});
+/******/ 			deferredPrefetch.length = 0;
+/******/ 		}
 /******/ 		return result;
 /******/ 	}
 /******/
@@ -154,11 +173,11 @@ exports[`check default output: runtime.js 1`] = `
 /******/ 		\\"runtime\\": 0
 /******/ 	};
 /******/
-/******/ 	var deferredModules = [];
+/******/ 	var deferredModules = [], deferredPrefetch = [];
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + \\"\\" + ({}[chunkId]||chunkId) + \\".js\\"
+/******/ 		return __webpack_require__.p + \\"\\" + ({\\"test1\\":\\"test1\\",\\"test2\\":\\"test2\\",\\"test5\\":\\"test5\\"}[chunkId]||chunkId) + \\".js\\"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -244,6 +263,33 @@ exports[`check default output: runtime.js 1`] = `
 /******/ 				document.head.appendChild(script);
 /******/ 			}
 /******/ 		}
+/******/
+/******/ 		// chunk preloadng for javascript
+/******/
+/******/ 		var chunkPreloadMap = {
+/******/ 			\\"test2\\": [
+/******/ 				\\"test5\\"
+/******/ 			]
+/******/ 		};
+/******/
+/******/ 		var chunkPreloadData = chunkPreloadMap[chunkId];
+/******/ 		if(chunkPreloadData) {
+/******/ 			chunkPreloadData.forEach(function(chunkId) {
+/******/ 				if(installedChunks[chunkId] === undefined) {
+/******/ 					installedChunks[chunkId] = null;
+/******/ 					var link = document.createElement('link');
+/******/
+/******/ 					link.charset = 'utf-8';
+/******/ 					if (__webpack_require__.nc) {
+/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);
+/******/ 					}
+/******/ 					link.rel = \\"preload\\";
+/******/ 					link.as = \\"script\\";
+/******/ 					link.href = jsonpScriptSrc(chunkId);
+/******/ 					document.head.appendChild(link);
+/******/ 				}
+/******/ 			});
+/******/ 		}
 /******/ 		return Promise.all(promises);
 /******/ 	};
 /******/
@@ -315,4 +361,77 @@ exports[`check default output: runtime.js 1`] = `
 /******/ })
 /************************************************************************/
 /******/ ([]);"
+`;
+
+exports[`check default output: test1.js 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[\\"test1\\"],{
+
+/***/ \\"./test/integration/fixtures/async-submodule3.js\\":
+/*!*******************************************************!*\\\\
+  !*** ./test/integration/fixtures/async-submodule3.js ***!
+  \\\\*******************************************************/
+/*! exports provided: foo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+\\"use strict\\";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\"foo\\", function() { return foo; });
+const foo = 'foo';
+
+console.log('foo loaded!');
+
+
+/***/ })
+
+}]);"
+`;
+
+exports[`check default output: test2.js 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[\\"test2\\"],{
+
+/***/ \\"./test/integration/fixtures/async-submodule4.js\\":
+/*!*******************************************************!*\\\\
+  !*** ./test/integration/fixtures/async-submodule4.js ***!
+  \\\\*******************************************************/
+/*! exports provided: foo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+\\"use strict\\";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\"foo\\", function() { return foo; });
+const foo = 'foo';
+
+async function run() {
+    console.log(await __webpack_require__.e(/*! import() | test5 */ \\"test5\\").then(__webpack_require__.bind(null, /*! ./async-submodule5 */ \\"./test/integration/fixtures/async-submodule5.js\\")));
+}
+
+run();
+
+
+/***/ })
+
+}]);"
+`;
+
+exports[`check default output: test5.js 1`] = `
+"(window[\\"webpackJsonp\\"] = window[\\"webpackJsonp\\"] || []).push([[\\"test5\\"],{
+
+/***/ \\"./test/integration/fixtures/async-submodule5.js\\":
+/*!*******************************************************!*\\\\
+  !*** ./test/integration/fixtures/async-submodule5.js ***!
+  \\\\*******************************************************/
+/*! exports provided: foo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+\\"use strict\\";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \\"foo\\", function() { return foo; });
+const foo = 'foo';
+
+console.log('foo loaded!');
+
+
+/***/ })
+
+}]);"
 `;

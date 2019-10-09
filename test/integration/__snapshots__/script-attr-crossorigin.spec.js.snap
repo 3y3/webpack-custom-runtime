@@ -40,6 +40,30 @@ exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by de
 "
 `;
 
+exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
+"
+`;
+
 exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: 0.js 1`] = `
 "Index: 0.js
 ===================================================================
@@ -77,15 +101,46 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config:
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -81,0 +81,3 @@
+@@ -55,1 +55,1 @@
+-/******/
++/******/ 					link.crossOrigin = \\"anonymous\\";
+@@ -98,0 +98,3 @@
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'anonymous';
 +/******/ 	  }
-@@ -224,1 +227,3 @@
+@@ -241,1 +244,3 @@
 -/******/
 +/******/ 				if (script.src.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 					script.crossOrigin = \\"anonymous\\";
 +/******/ 				}
+@@ -410,0 +415,3 @@
++/******/ 					if (link.href.indexOf(window.location.origin + '/') !== 0) {
++/******/ 						link.crossOrigin = \\"anonymous\\";
++/******/ 					}
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;
 
@@ -126,9 +181,33 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -81,0 +81,3 @@
+@@ -98,0 +98,3 @@
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'with-credentials';
 +/******/ 	  }
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: test1.js 1`] = `
+"Index: test1.js
+===================================================================
+--- test1.js	
++++ test1.js	
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: test2.js 1`] = `
+"Index: test2.js
+===================================================================
+--- test2.js	
++++ test2.js	
+"
+`;
+
+exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: test5.js 1`] = `
+"Index: test5.js
+===================================================================
+--- test5.js	
++++ test5.js	
 "
 `;
