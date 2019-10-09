@@ -1,103 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -185,0 +185,2 @@
+@@ Change 1 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['sb'] = scriptBuilder;
-@@ -215,0 +217,1 @@
+@@ Change 2 @@
 +/******/ 		var scriptBuilder = __webpack_require__.CustomRuntime['sb'];
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptBuilder: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptErrorHandler: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptErrorHandler: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptErrorHandler: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptErrorHandler: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -106,67 +18,11 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -185,0 +185,2 @@
+@@ Change 1 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['eh'] = scriptErrorHandler;
-@@ -215,0 +217,1 @@
+@@ Change 2 @@
 +/******/ 		var scriptErrorHandler = __webpack_require__.CustomRuntime['eh'];
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptErrorHandler: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptErrorHandler: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptErrorHandler: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptLoadHandler: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptLoadHandler: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptLoadHandler: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptLoadHandler: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -175,67 +31,11 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -185,0 +185,2 @@
+@@ Change 1 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['lh'] = scriptLoadHandler;
-@@ -215,0 +217,1 @@
+@@ Change 2 @@
 +/******/ 		var scriptLoadHandler = __webpack_require__.CustomRuntime['lh'];
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptLoadHandler: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptLoadHandler: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptLoadHandler: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptOptionsResolver: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptOptionsResolver: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptOptionsResolver: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptOptionsResolver: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -244,67 +44,11 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -185,0 +185,2 @@
+@@ Change 1 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['or'] = scriptOptionsResolver;
-@@ -215,0 +217,1 @@
+@@ Change 2 @@
 +/******/ 		var scriptOptionsResolver = __webpack_require__.CustomRuntime['or'];
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptOptionsResolver: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptOptionsResolver: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptOptionsResolver: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptUrlResolver: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptUrlResolver: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptUrlResolver: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptUrlResolver: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -313,67 +57,11 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -185,0 +185,2 @@
+@@ Change 1 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['ur'] = scriptUrlResolver;
-@@ -215,0 +217,1 @@
+@@ Change 2 @@
 +/******/ 		var scriptUrlResolver = __webpack_require__.CustomRuntime['ur'];
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptUrlResolver: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptUrlResolver: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scriptUrlResolver: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namespace: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namespace: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namespace: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namespace: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -382,14 +70,14 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namesp
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -185,0 +185,6 @@
+@@ Change 1 @@
 +/******/ 	window.Ya = window.Ya || {};
 +/******/ 	window.Ya['scriptUrlResolver'] = scriptUrlResolver;
 +/******/ 	window.Ya['scriptOptionsResolver'] = scriptOptionsResolver;
 +/******/ 	window.Ya['scriptBuilder'] = scriptBuilder;
 +/******/ 	window.Ya['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	window.Ya['scriptErrorHandler'] = scriptErrorHandler;
-@@ -215,0 +221,5 @@
+@@ Change 2 @@
 +/******/ 		var scriptUrlResolver = window.Ya['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver = window.Ya['scriptOptionsResolver'];
 +/******/ 		var scriptBuilder = window.Ya['scriptBuilder'];
@@ -398,75 +86,19 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namesp
 "
 `;
 
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namespace: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namespace: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namespace: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -185,0 +185,6 @@
+@@ Change 1 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['scriptUrlResolver'] = scriptUrlResolver;
 +/******/ 	__webpack_require__.CustomRuntime['scriptOptionsResolver'] = scriptOptionsResolver;
 +/******/ 	__webpack_require__.CustomRuntime['scriptBuilder'] = scriptBuilder;
 +/******/ 	__webpack_require__.CustomRuntime['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	__webpack_require__.CustomRuntime['scriptErrorHandler'] = scriptErrorHandler;
-@@ -215,0 +221,7 @@
+@@ Change 2 @@
 +/******/ 		var scriptUrlResolver = __webpack_require__.CustomRuntime['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver =
 +/******/ 		  __webpack_require__.CustomRuntime['scriptOptionsResolver'];
@@ -474,29 +106,5 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default names
 +/******/ 		var scriptLoadHandler = __webpack_require__.CustomRuntime['scriptLoadHandler'];
 +/******/ 		var scriptErrorHandler =
 +/******/ 		  __webpack_require__.CustomRuntime['scriptErrorHandler'];
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default namespace: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
 "
 `;

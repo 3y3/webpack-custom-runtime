@@ -1,169 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: runtime.js 1`] = `
-"Index: runtime.js
-===================================================================
---- runtime.js	
-+++ runtime.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should not to override script crossorigin by default: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -55,1 +55,1 @@
+@@ Change 1 @@
 -/******/
 +/******/ 					link.crossOrigin = \\"anonymous\\";
-@@ -98,0 +98,3 @@
+@@ Change 2 @@
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'anonymous';
 +/******/ 	  }
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -172,33 +20,9 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -98,0 +98,3 @@
+@@ Change 1 @@
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'with-credentials';
 +/******/ 	  }
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
 "
 `;

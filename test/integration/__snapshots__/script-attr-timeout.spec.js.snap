@@ -1,100 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScriptAttr(Timeout) should not to override script timeout by default: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should not to override script timeout by default: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should not to override script timeout by default: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should not to override script timeout by default: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`ScriptAttr(Timeout) should not to override script timeout by default: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -98,0 +98,1 @@
+@@ Change 1 @@
 +/******/ 	  result.timeout = 120;
-"
-`;
-
-exports[`ScriptAttr(Timeout) should not to override script timeout by default: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should not to override script timeout by default: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should not to override script timeout by default: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from config: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from config: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from config: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from config: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -103,64 +15,8 @@ exports[`ScriptAttr(Timeout) should override script timeout from config: runtime
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -98,0 +98,1 @@
+@@ Change 1 @@
 +/******/ 	  result.timeout = 60;
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from config: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from config: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from config: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from options: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from options: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from options: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from options: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -169,31 +25,7 @@ exports[`ScriptAttr(Timeout) should override script timeout from options: runtim
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -98,0 +98,1 @@
+@@ Change 1 @@
 +/******/ 	  result.timeout = 50;
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from options: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from options: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script timeout from options: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
 "
 `;

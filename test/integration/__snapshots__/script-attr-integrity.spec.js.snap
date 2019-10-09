@@ -1,71 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScriptAttr(Integrity) should not to enable script integrity by default: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(Integrity) should not to enable script integrity by default: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(Integrity) should not to enable script integrity by default: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(Integrity) should not to enable script integrity by default: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`ScriptAttr(Integrity) should not to enable script integrity by default: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -98,0 +98,3 @@
+@@ Change 1 @@
 +/******/ 	  if (integrityHash[chunkId]) {
 +/******/ 	    result.integrity = integrityHash[chunkId];
 +/******/ 	  }
-@@ -185,0 +188,1 @@
+@@ Change 2 @@
 +/******/ 	var integrityHash = {\\"0\\":\\"sha512-67QztUKPB1YridVUZbc9nLvOiXRnhatdPgXmhxhPUznijWDCIHU4/9/+MgM1pFaDxfLyCKLUPXmpdekPIiRa1w==\\",\\"1\\":\\"sha512-4AUMxK+75zuRGtuPNZjBlx4jkBShSpCudhXgvNv8diJ5uRdbGygbFetWB0cX/DahKCDlRTld07LkpXwdXCUqWA==\\",\\"test1\\":\\"sha512-LdhyyYGvYNX5TACyWstEUpBQOdTJ/6jhRagafWK263X7Q78EaOu3KxnWYWtIzg+R7WPVBoU0mw+5BQDL6lasig==\\",\\"test2\\":\\"sha512-hY2m4OUETqze2bya0S/G8PZk0dW1J8nBXfIgMBMVcP25cq6gOSBAgm0PqOT5DHm3Kxp9TGkh+5lrCREKEbIZiQ==\\",\\"test5\\":\\"sha512-vUly8MrNq6K5LCNq6VceRVY+8M1P7Uu1c7fQqhq7+oV/6M6jVgC88K0OVc6whB4lp6lJVFSmc5hd+b6q8RiR9A==\\"};
-"
-`;
-
-exports[`ScriptAttr(Integrity) should not to enable script integrity by default: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`ScriptAttr(Integrity) should not to enable script integrity by default: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`ScriptAttr(Integrity) should not to enable script integrity by default: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
 "
 `;

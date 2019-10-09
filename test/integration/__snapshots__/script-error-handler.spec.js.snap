@@ -1,43 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`scriptErrorHandler should apply custom func error handler: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom func error handler: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom func error handler: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom func error handler: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`scriptErrorHandler should apply custom func error handler: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -182,1 +182,13 @@
+@@ Change 1 @@
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(p1, p2, p3, p4) {
@@ -55,68 +23,12 @@ exports[`scriptErrorHandler should apply custom func error handler: runtime.js 1
 "
 `;
 
-exports[`scriptErrorHandler should apply custom func error handler: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom func error handler: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom func error handler: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom plain error handler: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom plain error handler: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom plain error handler: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom plain error handler: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`scriptErrorHandler should apply custom plain error handler: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -182,1 +182,13 @@
+@@ Change 1 @@
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
@@ -134,68 +46,12 @@ exports[`scriptErrorHandler should apply custom plain error handler: runtime.js 
 "
 `;
 
-exports[`scriptErrorHandler should apply custom plain error handler: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom plain error handler: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply custom plain error handler: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply multy error handlers: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply multy error handlers: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply multy error handlers: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply multy error handlers: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`scriptErrorHandler should apply multy error handlers: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -182,1 +182,16 @@
+@@ Change 1 @@
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
@@ -213,93 +69,5 @@ exports[`scriptErrorHandler should apply multy error handlers: runtime.js 1`] = 
 +/******/ 	    .then(function(result) {
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
-"
-`;
-
-exports[`scriptErrorHandler should apply multy error handlers: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply multy error handlers: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`scriptErrorHandler should apply multy error handlers: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: runtime.js 1`] = `
-"Index: runtime.js
-===================================================================
---- runtime.js	
-+++ runtime.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`scriptErrorHandler should reject original error, if there is no strategies: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
 "
 `;

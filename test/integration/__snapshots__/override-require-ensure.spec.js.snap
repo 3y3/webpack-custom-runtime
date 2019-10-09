@@ -1,49 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`require-ensure override should implement default webpack behavior: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`require-ensure override should implement default webpack behavior: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`require-ensure override should implement default webpack behavior: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`require-ensure override should implement default webpack behavior: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`require-ensure override should implement default webpack behavior: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -55,1 +55,1 @@
+@@ Change 1 @@
 -/******/
 +/******/ 					link.crossOrigin = \\"anonymous\\";
-@@ -86,0 +86,2 @@
+@@ Change 2 @@
 +/******/ 	function scriptUrlResolver(installedChunks, chunkId, mode) {
 +/******/ 	  var result = (originalUrl = jsonpScriptSrc(chunkId));
-@@ -87,0 +89,105 @@
+@@ Change 3 @@
 +/******/ 	  mode = mode || 'load';
 +/******/
 +/******/ 	  return result;
@@ -149,7 +117,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	}
 +/******/
 +/******/
-@@ -117,1 +224,15 @@
+@@ Change 4 @@
 -/******/ 		// JSONP chunk loading for javascript
 +/******/ 		var result = (function(
 +/******/ 		  installedChunks,
@@ -166,7 +134,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		  var PROMISE_REJECT = 1;
 +/******/ 		  var LOAD_PROMISE = 2;
 +/******/ 		  var installedChunkData = installedChunks[chunkId];
-@@ -119,2 +240,5 @@
+@@ Change 5 @@
 -/******/ 		var installedChunkData = installedChunks[chunkId];
 -/******/ 		if(installedChunkData !== 0) { // 0 means \\"already installed\\".
 +/******/ 		  if (installedChunkData === INSTALLED || installedChunkData) {
@@ -174,7 +142,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		      ? Promise.resolve()
 +/******/ 		      : installedChunkData[LOAD_PROMISE];
 +/******/ 		  }
-@@ -122,9 +246,2 @@
+@@ Change 6 @@
 -/******/ 			// a Promise means \\"currently loading\\".
 -/******/ 			if(installedChunkData) {
 -/******/ 				promises.push(installedChunkData[2]);
@@ -186,7 +154,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 -/******/ 				promises.push(installedChunkData[2] = promise);
 +/******/ 		  var url, options, script, error;
 +/******/ 		  var currentStackError = new Error(); // create error before stack unwound to get useful stacktrace later
-@@ -132,3 +249,16 @@
+@@ Change 7 @@
 -/******/ 				// start chunk loading
 -/******/ 				var script = document.createElement('script');
 -/******/ 				var onScriptComplete;
@@ -206,7 +174,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		    .then(appendScript)
 +/******/ 		    .catch(installedChunkData[PROMISE_REJECT]);
 +/******/ 		  return installedChunkData[LOAD_PROMISE];
-@@ -136,6 +266,3 @@
+@@ Change 8 @@
 -/******/ 				script.charset = 'utf-8';
 -/******/ 				script.timeout = 120;
 -/******/ 				if (__webpack_require__.nc) {
@@ -216,7 +184,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		  function checkScriptLoaded() {
 +/******/ 		    var chunk = installedChunks[chunkId];
 +/******/ 		    var isChunkComplete = chunk === INSTALLED; // ignore any errors if chunk is loaded
-@@ -143,26 +270,69 @@
+@@ Change 9 @@
 -/******/ 				// create error before stack unwound to get useful stacktrace later
 -/******/ 				var error = new Error();
 -/******/ 				onScriptComplete = function (event) {
@@ -312,9 +280,9 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));
-@@ -171,0 +341,1 @@
+@@ Change 10 @@
 +/******/
-@@ -184,1 +355,21 @@
+@@ Change 11 @@
 -/******/ 					var link = document.createElement('link');
 +/******/ 					var link = (function preloadBuilder(
 +/******/ 					  installedChunks,
@@ -337,7 +305,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 					  extend(link, options);
 +/******/ 					  link.href = url;
 +/******/ 					  return link;
-@@ -186,7 +377,12 @@
+@@ Change 12 @@
 -/******/ 					link.charset = 'utf-8';
 -/******/ 					if (__webpack_require__.nc) {
 -/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);
@@ -360,71 +328,15 @@ exports[`require-ensure override should implement default webpack behavior: runt
 "
 `;
 
-exports[`require-ensure override should implement default webpack behavior: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`require-ensure override should implement default webpack behavior: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`require-ensure override should implement default webpack behavior: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`require-ensure override should skip defaults on custom behavior: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`require-ensure override should skip defaults on custom behavior: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`require-ensure override should skip defaults on custom behavior: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`require-ensure override should skip defaults on custom behavior: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`require-ensure override should skip defaults on custom behavior: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -86,0 +86,2 @@
+@@ Change 1 @@
 +/******/ 	function scriptUrlResolver(installedChunks, chunkId, mode) {
 +/******/ 	  var result = (originalUrl = jsonpScriptSrc(chunkId));
-@@ -87,0 +89,97 @@
+@@ Change 2 @@
 +/******/ 	  mode = mode || 'load';
 +/******/
 +/******/ 	  return result;
@@ -522,7 +434,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	}
 +/******/
 +/******/
-@@ -117,1 +216,15 @@
+@@ Change 3 @@
 -/******/ 		// JSONP chunk loading for javascript
 +/******/ 		var result = (function(
 +/******/ 		  installedChunks,
@@ -539,7 +451,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		  var PROMISE_REJECT = 1;
 +/******/ 		  var LOAD_PROMISE = 2;
 +/******/ 		  var installedChunkData = installedChunks[chunkId];
-@@ -119,2 +232,5 @@
+@@ Change 4 @@
 -/******/ 		var installedChunkData = installedChunks[chunkId];
 -/******/ 		if(installedChunkData !== 0) { // 0 means \\"already installed\\".
 +/******/ 		  if (installedChunkData === INSTALLED || installedChunkData) {
@@ -547,7 +459,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		      ? Promise.resolve()
 +/******/ 		      : installedChunkData[LOAD_PROMISE];
 +/******/ 		  }
-@@ -122,9 +238,2 @@
+@@ Change 5 @@
 -/******/ 			// a Promise means \\"currently loading\\".
 -/******/ 			if(installedChunkData) {
 -/******/ 				promises.push(installedChunkData[2]);
@@ -559,7 +471,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 -/******/ 				promises.push(installedChunkData[2] = promise);
 +/******/ 		  var url, options, script, error;
 +/******/ 		  var currentStackError = new Error(); // create error before stack unwound to get useful stacktrace later
-@@ -132,3 +241,16 @@
+@@ Change 6 @@
 -/******/ 				// start chunk loading
 -/******/ 				var script = document.createElement('script');
 -/******/ 				var onScriptComplete;
@@ -579,7 +491,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		    .then(appendScript)
 +/******/ 		    .catch(installedChunkData[PROMISE_REJECT]);
 +/******/ 		  return installedChunkData[LOAD_PROMISE];
-@@ -136,6 +258,3 @@
+@@ Change 7 @@
 -/******/ 				script.charset = 'utf-8';
 -/******/ 				script.timeout = 120;
 -/******/ 				if (__webpack_require__.nc) {
@@ -589,7 +501,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		  function checkScriptLoaded() {
 +/******/ 		    var chunk = installedChunks[chunkId];
 +/******/ 		    var isChunkComplete = chunk === INSTALLED; // ignore any errors if chunk is loaded
-@@ -143,26 +262,69 @@
+@@ Change 8 @@
 -/******/ 				// create error before stack unwound to get useful stacktrace later
 -/******/ 				var error = new Error();
 -/******/ 				onScriptComplete = function (event) {
@@ -685,9 +597,9 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));
-@@ -171,0 +333,1 @@
+@@ Change 9 @@
 +/******/
-@@ -184,1 +347,21 @@
+@@ Change 10 @@
 -/******/ 					var link = document.createElement('link');
 +/******/ 					var link = (function preloadBuilder(
 +/******/ 					  installedChunks,
@@ -710,7 +622,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 					  extend(link, options);
 +/******/ 					  link.href = url;
 +/******/ 					  return link;
-@@ -186,7 +369,12 @@
+@@ Change 11 @@
 -/******/ 					link.charset = 'utf-8';
 -/******/ 					if (__webpack_require__.nc) {
 -/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);
@@ -730,29 +642,5 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 					    return acc;
 +/******/ 					  }
 +/******/ 					})(installedChunks, chunkId, scriptUrlResolver, scriptOptionsResolver);
-"
-`;
-
-exports[`require-ensure override should skip defaults on custom behavior: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`require-ensure override should skip defaults on custom behavior: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`require-ensure override should skip defaults on custom behavior: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
 "
 `;

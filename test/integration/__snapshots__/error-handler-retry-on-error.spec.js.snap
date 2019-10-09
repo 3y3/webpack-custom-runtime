@@ -1,107 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RetryOnError should be disabled on \`enabled: false\`: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`RetryOnError should be disabled on \`enabled: false\`: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`RetryOnError should be disabled on \`enabled: false\`: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`RetryOnError should be disabled on \`enabled: false\`: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
-exports[`RetryOnError should be disabled on \`enabled: false\`: runtime.js 1`] = `
-"Index: runtime.js
-===================================================================
---- runtime.js	
-+++ runtime.js	
-"
-`;
-
-exports[`RetryOnError should be disabled on \`enabled: false\`: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`RetryOnError should be disabled on \`enabled: false\`: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`RetryOnError should be disabled on \`enabled: false\`: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`RetryOnError should configure retry: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`RetryOnError should configure retry: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`RetryOnError should configure retry: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`RetryOnError should configure retry: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
 exports[`RetryOnError should configure retry: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -182,1 +182,21 @@
+@@ Change 1 @@
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
@@ -124,64 +28,8 @@ exports[`RetryOnError should configure retry: runtime.js 1`] = `
 +/******/ 	    .then(function(result) {
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
-@@ -185,0 +205,1 @@
+@@ Change 2 @@
 +/******/ 	var RetryOnError = { max: (2 || 1), cache: {} };
-"
-`;
-
-exports[`RetryOnError should configure retry: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`RetryOnError should configure retry: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`RetryOnError should configure retry: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
-"
-`;
-
-exports[`RetryOnError should setup default retry: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`RetryOnError should setup default retry: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`RetryOnError should setup default retry: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`RetryOnError should setup default retry: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
 "
 `;
 
@@ -190,7 +38,7 @@ exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -182,1 +182,21 @@
+@@ Change 1 @@
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
@@ -213,31 +61,7 @@ exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 +/******/ 	    .then(function(result) {
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
-@@ -185,0 +205,1 @@
+@@ Change 2 @@
 +/******/ 	var RetryOnError = { max: (1 || 1), cache: {} };
-"
-`;
-
-exports[`RetryOnError should setup default retry: test1.js 1`] = `
-"Index: test1.js
-===================================================================
---- test1.js	
-+++ test1.js	
-"
-`;
-
-exports[`RetryOnError should setup default retry: test2.js 1`] = `
-"Index: test2.js
-===================================================================
---- test2.js	
-+++ test2.js	
-"
-`;
-
-exports[`RetryOnError should setup default retry: test5.js 1`] = `
-"Index: test5.js
-===================================================================
---- test5.js	
-+++ test5.js	
 "
 `;
