@@ -105,12 +105,6 @@ exports[`ScriptAttr(Timeout) should override script timeout from config: runtime
 +++ runtime.js	
 @@ -98,0 +98,1 @@
 +/******/ 	  result.timeout = 60;
-@@ -236,1 +237,1 @@
--/******/ 				script.timeout = 120;
-+/******/ 				script.timeout = 60;
-@@ -264,1 +265,1 @@
--/******/ 				}, 120000);
-+/******/ 				}, 60000);
 "
 `;
 

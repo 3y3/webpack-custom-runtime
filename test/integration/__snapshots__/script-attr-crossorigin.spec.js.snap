@@ -108,15 +108,6 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config:
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'anonymous';
 +/******/ 	  }
-@@ -241,1 +244,3 @@
--/******/
-+/******/ 				if (script.src.indexOf(window.location.origin + '/') !== 0) {
-+/******/ 					script.crossOrigin = \\"anonymous\\";
-+/******/ 				}
-@@ -410,0 +415,3 @@
-+/******/ 					if (link.href.indexOf(window.location.origin + '/') !== 0) {
-+/******/ 						link.crossOrigin = \\"anonymous\\";
-+/******/ 					}
 "
 `;
 

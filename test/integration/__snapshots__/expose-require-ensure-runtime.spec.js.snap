@@ -40,7 +40,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 @@ -185,0 +185,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['sb'] = scriptBuilder;
-@@ -269,0 +271,1 @@
+@@ -215,0 +217,1 @@
 +/******/ 		var scriptBuilder = __webpack_require__.CustomRuntime['sb'];
 "
 `;
@@ -109,7 +109,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 @@ -185,0 +185,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['eh'] = scriptErrorHandler;
-@@ -269,0 +271,1 @@
+@@ -215,0 +217,1 @@
 +/******/ 		var scriptErrorHandler = __webpack_require__.CustomRuntime['eh'];
 "
 `;
@@ -178,7 +178,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 @@ -185,0 +185,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['lh'] = scriptLoadHandler;
-@@ -269,0 +271,1 @@
+@@ -215,0 +217,1 @@
 +/******/ 		var scriptLoadHandler = __webpack_require__.CustomRuntime['lh'];
 "
 `;
@@ -247,7 +247,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 @@ -185,0 +185,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['or'] = scriptOptionsResolver;
-@@ -269,0 +271,1 @@
+@@ -215,0 +217,1 @@
 +/******/ 		var scriptOptionsResolver = __webpack_require__.CustomRuntime['or'];
 "
 `;
@@ -316,7 +316,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 @@ -185,0 +185,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['ur'] = scriptUrlResolver;
-@@ -269,0 +271,1 @@
+@@ -215,0 +217,1 @@
 +/******/ 		var scriptUrlResolver = __webpack_require__.CustomRuntime['ur'];
 "
 `;
@@ -389,7 +389,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namesp
 +/******/ 	window.Ya['scriptBuilder'] = scriptBuilder;
 +/******/ 	window.Ya['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	window.Ya['scriptErrorHandler'] = scriptErrorHandler;
-@@ -269,0 +275,5 @@
+@@ -215,0 +221,5 @@
 +/******/ 		var scriptUrlResolver = window.Ya['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver = window.Ya['scriptOptionsResolver'];
 +/******/ 		var scriptBuilder = window.Ya['scriptBuilder'];
@@ -466,7 +466,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default names
 +/******/ 	__webpack_require__.CustomRuntime['scriptBuilder'] = scriptBuilder;
 +/******/ 	__webpack_require__.CustomRuntime['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	__webpack_require__.CustomRuntime['scriptErrorHandler'] = scriptErrorHandler;
-@@ -269,0 +275,7 @@
+@@ -215,0 +221,7 @@
 +/******/ 		var scriptUrlResolver = __webpack_require__.CustomRuntime['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver =
 +/******/ 		  __webpack_require__.CustomRuntime['scriptOptionsResolver'];

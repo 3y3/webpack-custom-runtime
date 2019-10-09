@@ -103,12 +103,6 @@ exports[`ScriptAttr(Type) should override script type from config: runtime.js 1`
 +++ runtime.js	
 @@ -98,0 +98,1 @@
 +/******/ 	  result.type = 'module';
-@@ -234,1 +235,1 @@
--/******/
-+/******/ 				script.type = \\"module\\";
-@@ -402,1 +403,1 @@
--/******/
-+/******/ 					link.type = \\"module\\";
 "
 `;
 

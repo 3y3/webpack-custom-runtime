@@ -149,21 +149,8 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	}
 +/******/
 +/******/
-@@ -135,1 +242,1 @@
--/******/
-+/******/ 				script.type = \\"module\\";
-@@ -137,1 +244,1 @@
--/******/ 				script.timeout = 120;
-+/******/ 				script.timeout = 60;
-@@ -142,1 +249,3 @@
--/******/
-+/******/ 				if (script.src.indexOf(window.location.origin + '/') !== 0) {
-+/******/ 					script.crossOrigin = \\"anonymous\\";
-+/******/ 				}
-@@ -165,1 +274,1 @@
--/******/ 				}, 120000);
-+/******/ 				}, 60000);
-@@ -171,0 +280,118 @@
+@@ -117,1 +224,15 @@
+-/******/ 		// JSONP chunk loading for javascript
 +/******/ 		var result = (function(
 +/******/ 		  installedChunks,
 +/******/ 		  chunkId,
@@ -179,16 +166,30 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		  var PROMISE_REJECT = 1;
 +/******/ 		  var LOAD_PROMISE = 2;
 +/******/ 		  var installedChunkData = installedChunks[chunkId];
-+/******/
+@@ -119,2 +240,5 @@
+-/******/ 		var installedChunkData = installedChunks[chunkId];
+-/******/ 		if(installedChunkData !== 0) { // 0 means \\"already installed\\".
 +/******/ 		  if (installedChunkData === INSTALLED || installedChunkData) {
 +/******/ 		    return installedChunkData === INSTALLED
 +/******/ 		      ? Promise.resolve()
 +/******/ 		      : installedChunkData[LOAD_PROMISE];
 +/******/ 		  }
-+/******/
+@@ -122,9 +246,2 @@
+-/******/ 			// a Promise means \\"currently loading\\".
+-/******/ 			if(installedChunkData) {
+-/******/ 				promises.push(installedChunkData[2]);
+-/******/ 			} else {
+-/******/ 				// setup Promise in chunk cache
+-/******/ 				var promise = new Promise(function(resolve, reject) {
+-/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+-/******/ 				});
+-/******/ 				promises.push(installedChunkData[2] = promise);
 +/******/ 		  var url, options, script, error;
 +/******/ 		  var currentStackError = new Error(); // create error before stack unwound to get useful stacktrace later
-+/******/
+@@ -132,3 +249,16 @@
+-/******/ 				// start chunk loading
+-/******/ 				var script = document.createElement('script');
+-/******/ 				var onScriptComplete;
 +/******/ 		  installedChunkData = installedChunks[chunkId] = [];
 +/******/ 		  installedChunkData[LOAD_PROMISE] = new Promise(function(resolve, reject) {
 +/******/ 		    installedChunkData[PROMISE_RESOLVE] = resolve;
@@ -205,11 +206,43 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		    .then(appendScript)
 +/******/ 		    .catch(installedChunkData[PROMISE_REJECT]);
 +/******/ 		  return installedChunkData[LOAD_PROMISE];
-+/******/
+@@ -136,6 +266,3 @@
+-/******/ 				script.charset = 'utf-8';
+-/******/ 				script.timeout = 120;
+-/******/ 				if (__webpack_require__.nc) {
+-/******/ 					script.setAttribute(\\"nonce\\", __webpack_require__.nc);
+-/******/ 				}
+-/******/ 				script.src = jsonpScriptSrc(chunkId);
 +/******/ 		  function checkScriptLoaded() {
 +/******/ 		    var chunk = installedChunks[chunkId];
 +/******/ 		    var isChunkComplete = chunk === INSTALLED; // ignore any errors if chunk is loaded
-+/******/
+@@ -143,26 +270,69 @@
+-/******/ 				// create error before stack unwound to get useful stacktrace later
+-/******/ 				var error = new Error();
+-/******/ 				onScriptComplete = function (event) {
+-/******/ 					// avoid mem leaks in IE.
+-/******/ 					script.onerror = script.onload = null;
+-/******/ 					clearTimeout(timeout);
+-/******/ 					var chunk = installedChunks[chunkId];
+-/******/ 					if(chunk !== 0) {
+-/******/ 						if(chunk) {
+-/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+-/******/ 							var realSrc = event && event.target && event.target.src;
+-/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\\\\n(' + errorType + ': ' + realSrc + ')';
+-/******/ 							error.name = 'ChunkLoadError';
+-/******/ 							error.type = errorType;
+-/******/ 							error.request = realSrc;
+-/******/ 							chunk[1](error);
+-/******/ 						}
+-/******/ 						installedChunks[chunkId] = undefined;
+-/******/ 					}
+-/******/ 				};
+-/******/ 				var timeout = setTimeout(function(){
+-/******/ 					onScriptComplete({ type: 'timeout', target: script });
+-/******/ 				}, 120000);
+-/******/ 				script.onerror = script.onload = onScriptComplete;
+-/******/ 				document.head.appendChild(script);
+-/******/ 			}
 +/******/ 		    if (isChunkComplete) {
 +/******/ 		      return;
 +/******/ 		    }
@@ -279,16 +312,50 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));
-+/******/ 		}
+@@ -171,0 +341,1 @@
 +/******/
+@@ -184,1 +355,20 @@
+-/******/ 					var link = document.createElement('link');
++/******/ 					var link = (function preloadBuilder(
++/******/ 					  installedChunks,
++/******/ 					  chunkId,
++/******/ 					  scriptUrlResolver,
++/******/ 					  scriptOptionsResolver
++/******/ 					) {
++/******/ 					  var link = document.createElement('link');
++/******/ 					  var url = scriptUrlResolver(installedChunks, chunkId, 'preload');
++/******/ 					  var options = extend(
++/******/ 					    {
++/******/ 					      // most compatible type
++/******/ 					      type: 'text/javascript',
++/******/ 					      charset: 'utf-8',
++/******/ 					      rel: 'preload',
++/******/ 					      as: 'script'
++/******/ 					    },
++/******/ 					    scriptOptionsResolver(installedChunks, chunkId, url, 'preload')
++/******/ 					  );
++/******/ 					  extend(link, options);
++/******/ 					  link.href = url;
+@@ -186,7 +376,12 @@
+-/******/ 					link.charset = 'utf-8';
+-/******/ 					if (__webpack_require__.nc) {
+-/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);
+-/******/ 					}
+-/******/ 					link.rel = \\"preload\\";
+-/******/ 					link.as = \\"script\\";
+-/******/ 					link.href = jsonpScriptSrc(chunkId);
++/******/ 					  function extend(acc, src) {
++/******/ 					    if (src) {
++/******/ 					      for (var key in src) {
++/******/ 					        if (src.hasOwnProperty(key)) {
++/******/ 					          acc[key] = src[key];
++/******/ 					        }
++/******/ 					      }
++/******/ 					    }
 +/******/
-@@ -185,1 +412,1 @@
--/******/
-+/******/ 					link.type = \\"module\\";
-@@ -193,0 +420,3 @@
-+/******/ 					if (link.href.indexOf(window.location.origin + '/') !== 0) {
-+/******/ 						link.crossOrigin = \\"anonymous\\";
-+/******/ 					}
++/******/ 					    return acc;
++/******/ 					  }
++/******/ 					})(installedChunks, chunkId, scriptUrlResolver, scriptOptionsResolver);
 "
 `;
 
@@ -454,7 +521,8 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	}
 +/******/
 +/******/
-@@ -171,0 +270,118 @@
+@@ -117,1 +216,15 @@
+-/******/ 		// JSONP chunk loading for javascript
 +/******/ 		var result = (function(
 +/******/ 		  installedChunks,
 +/******/ 		  chunkId,
@@ -470,16 +538,30 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		  var PROMISE_REJECT = 1;
 +/******/ 		  var LOAD_PROMISE = 2;
 +/******/ 		  var installedChunkData = installedChunks[chunkId];
-+/******/
+@@ -119,2 +232,5 @@
+-/******/ 		var installedChunkData = installedChunks[chunkId];
+-/******/ 		if(installedChunkData !== 0) { // 0 means \\"already installed\\".
 +/******/ 		  if (installedChunkData === INSTALLED || installedChunkData) {
 +/******/ 		    return installedChunkData === INSTALLED
 +/******/ 		      ? Promise.resolve()
 +/******/ 		      : installedChunkData[LOAD_PROMISE];
 +/******/ 		  }
-+/******/
+@@ -122,9 +238,2 @@
+-/******/ 			// a Promise means \\"currently loading\\".
+-/******/ 			if(installedChunkData) {
+-/******/ 				promises.push(installedChunkData[2]);
+-/******/ 			} else {
+-/******/ 				// setup Promise in chunk cache
+-/******/ 				var promise = new Promise(function(resolve, reject) {
+-/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+-/******/ 				});
+-/******/ 				promises.push(installedChunkData[2] = promise);
 +/******/ 		  var url, options, script, error;
 +/******/ 		  var currentStackError = new Error(); // create error before stack unwound to get useful stacktrace later
-+/******/
+@@ -132,3 +241,16 @@
+-/******/ 				// start chunk loading
+-/******/ 				var script = document.createElement('script');
+-/******/ 				var onScriptComplete;
 +/******/ 		  installedChunkData = installedChunks[chunkId] = [];
 +/******/ 		  installedChunkData[LOAD_PROMISE] = new Promise(function(resolve, reject) {
 +/******/ 		    installedChunkData[PROMISE_RESOLVE] = resolve;
@@ -496,11 +578,43 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		    .then(appendScript)
 +/******/ 		    .catch(installedChunkData[PROMISE_REJECT]);
 +/******/ 		  return installedChunkData[LOAD_PROMISE];
-+/******/
+@@ -136,6 +258,3 @@
+-/******/ 				script.charset = 'utf-8';
+-/******/ 				script.timeout = 120;
+-/******/ 				if (__webpack_require__.nc) {
+-/******/ 					script.setAttribute(\\"nonce\\", __webpack_require__.nc);
+-/******/ 				}
+-/******/ 				script.src = jsonpScriptSrc(chunkId);
 +/******/ 		  function checkScriptLoaded() {
 +/******/ 		    var chunk = installedChunks[chunkId];
 +/******/ 		    var isChunkComplete = chunk === INSTALLED; // ignore any errors if chunk is loaded
-+/******/
+@@ -143,26 +262,69 @@
+-/******/ 				// create error before stack unwound to get useful stacktrace later
+-/******/ 				var error = new Error();
+-/******/ 				onScriptComplete = function (event) {
+-/******/ 					// avoid mem leaks in IE.
+-/******/ 					script.onerror = script.onload = null;
+-/******/ 					clearTimeout(timeout);
+-/******/ 					var chunk = installedChunks[chunkId];
+-/******/ 					if(chunk !== 0) {
+-/******/ 						if(chunk) {
+-/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+-/******/ 							var realSrc = event && event.target && event.target.src;
+-/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\\\\n(' + errorType + ': ' + realSrc + ')';
+-/******/ 							error.name = 'ChunkLoadError';
+-/******/ 							error.type = errorType;
+-/******/ 							error.request = realSrc;
+-/******/ 							chunk[1](error);
+-/******/ 						}
+-/******/ 						installedChunks[chunkId] = undefined;
+-/******/ 					}
+-/******/ 				};
+-/******/ 				var timeout = setTimeout(function(){
+-/******/ 					onScriptComplete({ type: 'timeout', target: script });
+-/******/ 				}, 120000);
+-/******/ 				script.onerror = script.onload = onScriptComplete;
+-/******/ 				document.head.appendChild(script);
+-/******/ 			}
 +/******/ 		    if (isChunkComplete) {
 +/******/ 		      return;
 +/******/ 		    }
@@ -570,9 +684,50 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/
 +/******/ 		if (result) {
 +/******/ 		  promises.push.apply(promises, [].concat(result));
-+/******/ 		}
+@@ -171,0 +333,1 @@
 +/******/
+@@ -184,1 +347,20 @@
+-/******/ 					var link = document.createElement('link');
++/******/ 					var link = (function preloadBuilder(
++/******/ 					  installedChunks,
++/******/ 					  chunkId,
++/******/ 					  scriptUrlResolver,
++/******/ 					  scriptOptionsResolver
++/******/ 					) {
++/******/ 					  var link = document.createElement('link');
++/******/ 					  var url = scriptUrlResolver(installedChunks, chunkId, 'preload');
++/******/ 					  var options = extend(
++/******/ 					    {
++/******/ 					      // most compatible type
++/******/ 					      type: 'text/javascript',
++/******/ 					      charset: 'utf-8',
++/******/ 					      rel: 'preload',
++/******/ 					      as: 'script'
++/******/ 					    },
++/******/ 					    scriptOptionsResolver(installedChunks, chunkId, url, 'preload')
++/******/ 					  );
++/******/ 					  extend(link, options);
++/******/ 					  link.href = url;
+@@ -186,7 +368,12 @@
+-/******/ 					link.charset = 'utf-8';
+-/******/ 					if (__webpack_require__.nc) {
+-/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);
+-/******/ 					}
+-/******/ 					link.rel = \\"preload\\";
+-/******/ 					link.as = \\"script\\";
+-/******/ 					link.href = jsonpScriptSrc(chunkId);
++/******/ 					  function extend(acc, src) {
++/******/ 					    if (src) {
++/******/ 					      for (var key in src) {
++/******/ 					        if (src.hasOwnProperty(key)) {
++/******/ 					          acc[key] = src[key];
++/******/ 					        }
++/******/ 					      }
++/******/ 					    }
 +/******/
++/******/ 					    return acc;
++/******/ 					  }
++/******/ 					})(installedChunks, chunkId, scriptUrlResolver, scriptOptionsResolver);
 "
 `;
 
