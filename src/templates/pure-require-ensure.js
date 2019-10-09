@@ -9,9 +9,9 @@
 module.exports = function(
     installedChunks,
     chunkId,
-    scriptBuilder,
     scriptUrlResolver,
     scriptOptionsResolver,
+    scriptBuilder,
     scriptLoadHandler,
     scriptErrorHandler
 ) {
@@ -61,7 +61,7 @@ module.exports = function(
             return;
         }
 
-        installedChunks[chunkId] = undefined;
+        installedChunks[chunkId] = null; // not 'undefined' for prevent useless prefetching
 
         error = error || currentStackError;
         error.type = error.type || 'missing';

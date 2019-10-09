@@ -50,13 +50,13 @@ class CustomRuntimePlugin {
         });
     }
 
-    redefineRequireEnsure(mainTemplate, requireEnsureVars = []) {
+    redefineRequireEnsure(mainTemplate) {
         requireEnsureVars.forEach((name) => {
             Definitions[name](mainTemplate);
             Definitions.localFunction(mainTemplate, name);
         });
 
-        Definitions.requireEnsure(mainTemplate, requireEnsureVars);
+        Definitions.requireEnsure(mainTemplate);
     }
 }
 

@@ -18,7 +18,7 @@ describe('ScriptAttr(Timeout)', function() {
 
     cit('should override script timeout from options', { value: 50 });
 
-    cit('should override script type from config', {}, {
+    cit('should override script timeout from config', {}, {
         output: {
             chunkLoadTimeout: 60000
         }

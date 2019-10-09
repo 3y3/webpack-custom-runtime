@@ -37,9 +37,58 @@ exports[`ScriptAttr(Timeout) should not to override script timeout by default: r
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -151,0 +151,2 @@
+@@ -78,0 +78,2 @@
 +/******/ 	  result.timeout = 120;
 +/******/
+"
+`;
+
+exports[`ScriptAttr(Timeout) should override script timeout from config: 0.js 1`] = `
+"Index: 0.js
+===================================================================
+--- 0.js	
++++ 0.js	
+"
+`;
+
+exports[`ScriptAttr(Timeout) should override script timeout from config: 1.js 1`] = `
+"Index: 1.js
+===================================================================
+--- 1.js	
++++ 1.js	
+"
+`;
+
+exports[`ScriptAttr(Timeout) should override script timeout from config: main-module.js 1`] = `
+"Index: main-module.js
+===================================================================
+--- main-module.js	
++++ main-module.js	
+"
+`;
+
+exports[`ScriptAttr(Timeout) should override script timeout from config: other-module.js 1`] = `
+"Index: other-module.js
+===================================================================
+--- other-module.js	
++++ other-module.js	
+"
+`;
+
+exports[`ScriptAttr(Timeout) should override script timeout from config: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ -78,0 +78,2 @@
++/******/ 	  result.timeout = 60;
++/******/
+@@ -215,1 +217,1 @@
+-/******/ 				script.timeout = 120;
++/******/ 				script.timeout = 60;
+@@ -243,1 +245,1 @@
+-/******/ 				}, 120000);
++/******/ 				}, 60000);
 "
 `;
 
@@ -80,51 +129,8 @@ exports[`ScriptAttr(Timeout) should override script timeout from options: runtim
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -151,0 +151,2 @@
+@@ -78,0 +78,2 @@
 +/******/ 	  result.timeout = 50;
-+/******/
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script type from config: 0.js 1`] = `
-"Index: 0.js
-===================================================================
---- 0.js	
-+++ 0.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script type from config: 1.js 1`] = `
-"Index: 1.js
-===================================================================
---- 1.js	
-+++ 1.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script type from config: main-module.js 1`] = `
-"Index: main-module.js
-===================================================================
---- main-module.js	
-+++ main-module.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script type from config: other-module.js 1`] = `
-"Index: other-module.js
-===================================================================
---- other-module.js	
-+++ other-module.js	
-"
-`;
-
-exports[`ScriptAttr(Timeout) should override script type from config: runtime.js 1`] = `
-"Index: runtime.js
-===================================================================
---- runtime.js	
-+++ runtime.js	
-@@ -151,0 +151,2 @@
-+/******/ 	  result.timeout = 60;
 +/******/
 "
 `;

@@ -2,13 +2,16 @@
 
 const zip = require('./utils/array-to-hash');
 
-const requireEnsureVars = [
-    'scriptBuilder',
+const requireEnsureBaseVars = [
     'scriptUrlResolver',
-    'scriptOptionsResolver',
+    'scriptOptionsResolver'
+];
+
+const requireEnsureVars = requireEnsureBaseVars.concat([
+    'scriptBuilder',
     'scriptLoadHandler',
     'scriptErrorHandler'
-];
+]);
 
 module.exports = {
     pluginName: 'CustomRuntimePlugin',
@@ -18,6 +21,7 @@ module.exports = {
         chunkId: 'chunkId',
         result: 'result',
         url: 'url',
+        mode: 'mode',
         originalError: 'originalError',
         originalUrl: 'originalUrl'
     }, zip(requireEnsureVars)),
@@ -35,6 +39,8 @@ module.exports = {
         scriptErrorHandlerStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
         requireEnsureVars: [ 'source', 'chunk', 'hash', 'expressions' ],
     },
+
+    requireEnsureBaseVars,
 
     requireEnsureVars
 };

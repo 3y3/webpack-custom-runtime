@@ -37,7 +37,7 @@ exports[`ScriptAttr(Integrity) should not to enable script integrity by default:
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -151,0 +151,4 @@
+@@ -78,0 +78,4 @@
 +/******/ 	  if (integrityHash[chunkId]) {
 +/******/ 	    result.integrity = integrityHash[chunkId];
 +/******/ 	  }

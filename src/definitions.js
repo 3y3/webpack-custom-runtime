@@ -4,7 +4,7 @@ const pureScriptBuilder = require('./templates/pure-script-builder');
 const pureRequireEnsure = require('./templates/pure-require-ensure');
 const zip = require('./utils/array-to-hash');
 const format = require('./utils/format-code');
-const { pluginName, expressions } = require('./config');
+const { pluginName, expressions, requireEnsureVars } = require('./config');
 
 const {
     scriptUrlResolver,
@@ -106,31 +106,36 @@ module.exports = {
                 })`;
 
             return format(`function ${scriptErrorHandler}(${installedChunks}, ${chunkId}, ${originalError}) {
-                return ${strategies.length
-                ? strategyProcessor
-                : `Promise.reject(${originalError})`
-            };
+                return ${
+                strategies.length
+                    ? strategyProcessor
+                    : `Promise.reject(${originalError})`
+                };
             }`);
         });
     },
 
-    requireEnsure(mainTemplate, requireEnsureVars) {
-        const customCallArgs = requireEnsureVars.join(', ');
+    requireEnsure(mainTemplate) {
         const expressions = zip(requireEnsureVars);
 
-        mainTemplate.hooks.requireEnsure.tap(`${pluginName} load`, (source, chunk, hash) => {
-            const ensure = pureRequireEnsure.toString();
-
+        mainTemplate.hooks.requireEnsure.tap(`${pluginName} env`, (source, chunk, hash) => {
             const prepareEnv = mainTemplate.hooks.requireEnsureVars.call('', chunk, hash, expressions);
-            const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
 
-            return format(`
-                ${prepareEnv}
+            return [ source, format(prepareEnv) ].join('\n');
+        });
+
+        mainTemplate.hooks.requireEnsure.tap(`${pluginName} load`, (source) => {
+            const customCallArgs = requireEnsureVars.join(', ');
+            const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
+            const ensure = pureRequireEnsure.toString();
+            const result = format(`
                 var result = (${ensure})(${callArgs});
                 if (result) {
                     promises.push.apply(promises, [].concat(result));
                 }
             `);
+
+            return [ source, result ].join('\n');
         });
     },
 
