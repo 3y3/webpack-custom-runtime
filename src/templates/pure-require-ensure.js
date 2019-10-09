@@ -86,8 +86,8 @@ module.exports = function(
     }
 
     function resolveUrlAndOptions() {
-        url = scriptUrlResolver(installedChunks, chunkId);
-        options = scriptOptionsResolver(installedChunks, chunkId, url);
+        url = scriptUrlResolver(installedChunks, chunkId, 'load');
+        options = scriptOptionsResolver(installedChunks, chunkId, url, 'load');
     }
 
     function appendScript() {

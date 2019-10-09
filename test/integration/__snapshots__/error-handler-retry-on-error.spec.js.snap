@@ -77,7 +77,7 @@ exports[`RetryOnError should configure retry: runtime.js 1`] = `
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -161,1 +161,21 @@
+@@ -165,1 +165,21 @@
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
@@ -100,7 +100,7 @@ exports[`RetryOnError should configure retry: runtime.js 1`] = `
 +/******/ 	    .then(function(result) {
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
-@@ -164,0 +184,1 @@
+@@ -168,0 +188,1 @@
 +/******/ 	var RetryOnError = { max: (2 || 1), cache: {} };
 "
 `;
@@ -142,7 +142,7 @@ exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -161,1 +161,21 @@
+@@ -165,1 +165,21 @@
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
@@ -165,7 +165,7 @@ exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 +/******/ 	    .then(function(result) {
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
-@@ -164,0 +184,1 @@
+@@ -168,0 +188,1 @@
 +/******/ 	var RetryOnError = { max: (1 || 1), cache: {} };
 "
 `;

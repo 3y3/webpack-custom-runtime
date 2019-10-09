@@ -21,17 +21,18 @@ module.exports = {
     },
 
     scriptUrlResolver(mainTemplate) {
-        const { installedChunks, chunkId, originalUrl, result } = expressions;
+        const { installedChunks, chunkId, originalUrl, result, mode } = expressions;
 
         mainTemplate.hooks.scriptUrlResolver.tap(pluginName, (source, chunk, hash) => {
             const strategies = mainTemplate.hooks.scriptUrlResolverStrategy.call(
                 [], chunk, hash,
-                { installedChunks, chunkId, originalUrl, result }
+                { installedChunks, chunkId, originalUrl, result, mode }
             );
 
-            return format(`function ${scriptUrlResolver}(${installedChunks}, ${chunkId}) {
+            return format(`function ${scriptUrlResolver}(${installedChunks}, ${chunkId}, ${mode}) {
                 var ${result} = ${originalUrl} = jsonpScriptSrc(${chunkId});
                 
+                ${mode} = ${mode} || 'load';
                 ${strategies.join('\n')}
                 
                 return ${result};         
@@ -40,17 +41,18 @@ module.exports = {
     },
 
     scriptOptionsResolver(mainTemplate) {
-        const { installedChunks, chunkId, url, result } = expressions;
+        const { installedChunks, chunkId, url, result, mode } = expressions;
 
         mainTemplate.hooks.scriptOptionsResolver.tap(pluginName, (source, chunk, hash) => {
             const strategies = mainTemplate.hooks.scriptOptionsResolverStrategy.call(
                 [], chunk, hash,
-                { installedChunks, chunkId, url, result }
+                { installedChunks, chunkId, url, result, mode }
             );
 
-            return format(`function ${scriptOptionsResolver}(${installedChunks}, ${chunkId}, ${url}) {
+            return format(`function ${scriptOptionsResolver}(${installedChunks}, ${chunkId}, ${url}, ${mode}) {
                 var ${result} = {};
                 
+                ${mode} = ${mode} || 'load';
                 ${strategies.join('\n')}
 
                 return ${result};         
@@ -130,6 +132,7 @@ module.exports = {
             const ensure = pureRequireEnsure.toString();
             const result = format(`
                 var result = (${ensure})(${callArgs});
+
                 if (result) {
                     promises.push.apply(promises, [].concat(result));
                 }

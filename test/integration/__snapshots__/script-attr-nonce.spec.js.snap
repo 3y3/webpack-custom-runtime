@@ -77,11 +77,10 @@ exports[`ScriptAttr(Nonce) should override script nonce by default: runtime.js 1
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -78,0 +78,4 @@
+@@ -81,0 +81,3 @@
 +/******/ 	  if (Ya.nonce) {
 +/******/ 	    result.nonce = Ya.nonce;
 +/******/ 	  }
-+/******/
 "
 `;
 
@@ -122,10 +121,9 @@ exports[`ScriptAttr(Nonce) should override script nonce from custom holder: runt
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -78,0 +78,4 @@
+@@ -81,0 +81,3 @@
 +/******/ 	  if (Ya.nonce) {
 +/******/ 	    result.nonce = Ya.nonce;
 +/******/ 	  }
-+/******/
 "
 `;

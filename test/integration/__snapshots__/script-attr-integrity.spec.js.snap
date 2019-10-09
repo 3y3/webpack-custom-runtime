@@ -37,12 +37,11 @@ exports[`ScriptAttr(Integrity) should not to enable script integrity by default:
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -78,0 +78,4 @@
+@@ -81,0 +81,3 @@
 +/******/ 	  if (integrityHash[chunkId]) {
 +/******/ 	    result.integrity = integrityHash[chunkId];
 +/******/ 	  }
-+/******/
-@@ -164,0 +168,1 @@
+@@ -168,0 +171,1 @@
 +/******/ 	var integrityHash = {\\"0\\":\\"sha512-67QztUKPB1YridVUZbc9nLvOiXRnhatdPgXmhxhPUznijWDCIHU4/9/+MgM1pFaDxfLyCKLUPXmpdekPIiRa1w==\\",\\"1\\":\\"sha512-4AUMxK+75zuRGtuPNZjBlx4jkBShSpCudhXgvNv8diJ5uRdbGygbFetWB0cX/DahKCDlRTld07LkpXwdXCUqWA==\\"};
 "
 `;

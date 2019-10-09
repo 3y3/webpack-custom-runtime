@@ -37,10 +37,10 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -164,0 +164,2 @@
+@@ -168,0 +168,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['sb'] = scriptBuilder;
-@@ -248,0 +250,1 @@
+@@ -252,0 +254,1 @@
 +/******/ 		var scriptBuilder = __webpack_require__.CustomRuntime['sb'];
 "
 `;
@@ -82,10 +82,10 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -164,0 +164,2 @@
+@@ -168,0 +168,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['eh'] = scriptErrorHandler;
-@@ -248,0 +250,1 @@
+@@ -252,0 +254,1 @@
 +/******/ 		var scriptErrorHandler = __webpack_require__.CustomRuntime['eh'];
 "
 `;
@@ -127,10 +127,10 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -164,0 +164,2 @@
+@@ -168,0 +168,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['lh'] = scriptLoadHandler;
-@@ -248,0 +250,1 @@
+@@ -252,0 +254,1 @@
 +/******/ 		var scriptLoadHandler = __webpack_require__.CustomRuntime['lh'];
 "
 `;
@@ -172,10 +172,10 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -164,0 +164,2 @@
+@@ -168,0 +168,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['or'] = scriptOptionsResolver;
-@@ -248,0 +250,1 @@
+@@ -252,0 +254,1 @@
 +/******/ 		var scriptOptionsResolver = __webpack_require__.CustomRuntime['or'];
 "
 `;
@@ -217,10 +217,10 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose part of runtime for scri
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -164,0 +164,2 @@
+@@ -168,0 +168,2 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['ur'] = scriptUrlResolver;
-@@ -248,0 +250,1 @@
+@@ -252,0 +254,1 @@
 +/******/ 		var scriptUrlResolver = __webpack_require__.CustomRuntime['ur'];
 "
 `;
@@ -262,14 +262,14 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namesp
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -164,0 +164,6 @@
+@@ -168,0 +168,6 @@
 +/******/ 	window.Ya = window.Ya || {};
 +/******/ 	window.Ya['scriptUrlResolver'] = scriptUrlResolver;
 +/******/ 	window.Ya['scriptOptionsResolver'] = scriptOptionsResolver;
 +/******/ 	window.Ya['scriptBuilder'] = scriptBuilder;
 +/******/ 	window.Ya['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	window.Ya['scriptErrorHandler'] = scriptErrorHandler;
-@@ -248,0 +254,5 @@
+@@ -252,0 +258,5 @@
 +/******/ 		var scriptUrlResolver = window.Ya['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver = window.Ya['scriptOptionsResolver'];
 +/******/ 		var scriptBuilder = window.Ya['scriptBuilder'];
@@ -315,14 +315,14 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default names
 ===================================================================
 --- runtime.js	
 +++ runtime.js	
-@@ -164,0 +164,6 @@
+@@ -168,0 +168,6 @@
 +/******/ 	__webpack_require__.CustomRuntime = __webpack_require__.CustomRuntime || {};
 +/******/ 	__webpack_require__.CustomRuntime['scriptUrlResolver'] = scriptUrlResolver;
 +/******/ 	__webpack_require__.CustomRuntime['scriptOptionsResolver'] = scriptOptionsResolver;
 +/******/ 	__webpack_require__.CustomRuntime['scriptBuilder'] = scriptBuilder;
 +/******/ 	__webpack_require__.CustomRuntime['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	__webpack_require__.CustomRuntime['scriptErrorHandler'] = scriptErrorHandler;
-@@ -248,0 +254,7 @@
+@@ -252,0 +258,7 @@
 +/******/ 		var scriptUrlResolver = __webpack_require__.CustomRuntime['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver =
 +/******/ 		  __webpack_require__.CustomRuntime['scriptOptionsResolver'];
