@@ -314,7 +314,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		  promises.push.apply(promises, [].concat(result));
 @@ -171,0 +341,1 @@
 +/******/
-@@ -184,1 +355,20 @@
+@@ -184,1 +355,21 @@
 -/******/ 					var link = document.createElement('link');
 +/******/ 					var link = (function preloadBuilder(
 +/******/ 					  installedChunks,
@@ -336,7 +336,8 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 					  );
 +/******/ 					  extend(link, options);
 +/******/ 					  link.href = url;
-@@ -186,7 +376,12 @@
++/******/ 					  return link;
+@@ -186,7 +377,12 @@
 -/******/ 					link.charset = 'utf-8';
 -/******/ 					if (__webpack_require__.nc) {
 -/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);
@@ -686,7 +687,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		  promises.push.apply(promises, [].concat(result));
 @@ -171,0 +333,1 @@
 +/******/
-@@ -184,1 +347,20 @@
+@@ -184,1 +347,21 @@
 -/******/ 					var link = document.createElement('link');
 +/******/ 					var link = (function preloadBuilder(
 +/******/ 					  installedChunks,
@@ -708,7 +709,8 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 					  );
 +/******/ 					  extend(link, options);
 +/******/ 					  link.href = url;
-@@ -186,7 +368,12 @@
++/******/ 					  return link;
+@@ -186,7 +369,12 @@
 -/******/ 					link.charset = 'utf-8';
 -/******/ 					if (__webpack_require__.nc) {
 -/******/ 						link.setAttribute(\\"nonce\\", __webpack_require__.nc);

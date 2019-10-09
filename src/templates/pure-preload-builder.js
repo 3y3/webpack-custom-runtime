@@ -26,6 +26,8 @@ module.exports = function preloadBuilder(
 
     link.href = url;
 
+    return link;
+
     function extend(acc, src) {
         if (src) {
             for (var key in src) {
