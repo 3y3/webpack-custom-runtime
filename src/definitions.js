@@ -1,10 +1,11 @@
 'use strict';
 
 const pureScriptBuilder = require('./templates/pure-script-builder');
+const purePreloadBuilder = require('./templates/pure-preload-builder');
 const pureRequireEnsure = require('./templates/pure-require-ensure');
 const zip = require('./utils/array-to-hash');
 const format = require('./utils/format-code');
-const { pluginName, expressions, requireEnsureVars } = require('./config');
+const { pluginName, expressions, requireEnsureBaseVars, requireEnsureVars } = require('./config');
 
 const {
     scriptUrlResolver,
@@ -139,6 +140,16 @@ module.exports = {
             `);
 
             return [ source, result ].join('\n');
+        });
+
+        mainTemplate.hooks.linkPreload.tap(`${pluginName} preload`, (source, chunk) => {
+            const customCallArgs = requireEnsureBaseVars.join(', ');
+            const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
+            const preload = purePreloadBuilder.toString();
+
+            return format(`
+                var link = (${preload})(${callArgs});
+            `);
         });
     },
 

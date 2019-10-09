@@ -3,7 +3,7 @@
 const SyncWaterfallHook = require('tapable').SyncWaterfallHook;
 const Definitions = require('./definitions');
 
-const { pluginName, hooks, requireEnsureVars } = require('./config');
+const { pluginName, hooks, requireEnsureVars, pluginsToMute } = require('./config');
 
 class CustomRuntimePlugin {
     constructor(options = {}) {
@@ -15,9 +15,11 @@ class CustomRuntimePlugin {
     apply(compiler) {
         compiler.hooks.compilation.tap(pluginName, compilation => {
             const { mainTemplate } = compilation;
-            this.mutePlugins(mainTemplate.hooks.requireEnsure, [
-                'JsonpMainTemplatePlugin load'
-            ]);
+
+            Object.keys(pluginsToMute).forEach((hookName) => {
+                this.mutePlugins(mainTemplate.hooks[hookName], pluginsToMute[hookName]);
+            });
+
             this.registerHooks(mainTemplate, hooks);
             this.redefineRequireEnsure(mainTemplate, requireEnsureVars);
         });

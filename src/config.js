@@ -40,6 +40,15 @@ module.exports = {
         requireEnsureVars: [ 'source', 'chunk', 'hash', 'expressions' ],
     },
 
+    pluginsToMute: {
+        requireEnsure: [
+            'JsonpMainTemplatePlugin load'
+        ],
+        linkPreload: [
+            'JsonpMainTemplatePlugin'
+        ]
+    },
+
     requireEnsureBaseVars,
 
     requireEnsureVars
