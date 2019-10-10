@@ -5,6 +5,13 @@ const WebpackCustomRuntime = require('../../').CustomRuntimePlugin;
 
 describe('RetryOnError', function() {
 
+    const base = cct.base({
+        plugins: [
+            new WebpackCustomRuntime({ behavior: '' }),
+            new WebpackCustomRuntime.ErrorHandler.RetryOnError()
+        ]
+    });
+
     function cit(name, plugins = [], base) {
         cct(name, {
             plugins: [
@@ -22,7 +29,13 @@ describe('RetryOnError', function() {
         new WebpackCustomRuntime.ErrorHandler.RetryOnError({
             maxRetryCount: 2
         })
-    ]);
+    ], base);
+
+    cit('should configure waitOnline', [
+        new WebpackCustomRuntime.ErrorHandler.RetryOnError({
+            waitOnline: true
+        })
+    ], base);
 
     cit('should be disabled on `enabled: false`', [
         new WebpackCustomRuntime.ErrorHandler.RetryOnError({
@@ -30,20 +43,7 @@ describe('RetryOnError', function() {
         })
     ]);
 
-    cit('should configure waitOnline', [
-        new WebpackCustomRuntime.ErrorHandler.RetryOnError({
-            waitOnline: true
-        })
-    ]);
-
     describe('should configure namespace', function() {
-
-        const base = cct.base({
-            plugins: [
-                new WebpackCustomRuntime({ behavior: '' }),
-                new WebpackCustomRuntime.ErrorHandler.RetryOnError()
-            ]
-        });
 
         cit('top level case', [
             new WebpackCustomRuntime.ErrorHandler.RetryOnError({
