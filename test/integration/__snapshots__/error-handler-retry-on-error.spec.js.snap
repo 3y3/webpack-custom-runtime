@@ -1,5 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`RetryOnError should configure namespace brackets case: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	      var ns = __webpack_require__.RetryOnError;
++/******/ 	      var ns = window['__NS__'];
+@@ Change 2 @@
+-/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	            window['__NS__'] = window['__NS__'] || {};
+@@ Change 3 @@
+-/******/ 	            var ns = __webpack_require__.RetryOnError;
++/******/ 	            var ns = window['__NS__'];
+"
+`;
+
+exports[`RetryOnError should configure namespace dot case: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	      var ns = __webpack_require__.RetryOnError;
++/******/ 	      var ns = Ya.__NS__;
+@@ Change 2 @@
+-/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	            Ya.__NS__ = Ya.__NS__ || {};
+@@ Change 3 @@
+-/******/ 	            var ns = __webpack_require__.RetryOnError;
++/******/ 	            var ns = Ya.__NS__;
+"
+`;
+
+exports[`RetryOnError should configure namespace requireFn case: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	      var ns = __webpack_require__.RetryOnError;
++/******/ 	      var ns = __webpack_require__.__NS__;
+@@ Change 2 @@
+-/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	            __webpack_require__.__NS__ = __webpack_require__.__NS__ || {};
+@@ Change 3 @@
+-/******/ 	            var ns = __webpack_require__.RetryOnError;
++/******/ 	            var ns = __webpack_require__.__NS__;
+"
+`;
+
+exports[`RetryOnError should configure namespace top level case: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	      var ns = __webpack_require__.RetryOnError;
++/******/ 	      var ns = window.__NS__;
+@@ Change 2 @@
+-/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	            window.__NS__ = window.__NS__ || {};
+@@ Change 3 @@
+-/******/ 	            var ns = __webpack_require__.RetryOnError;
++/******/ 	            var ns = window.__NS__;
+"
+`;
+
 exports[`RetryOnError should configure retry: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================
@@ -9,15 +77,20 @@ exports[`RetryOnError should configure retry: runtime.js 1`] = `
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
-+/******/ 	      var retries = RetryOnError.cache[chunkId] || 0;
++/******/ 	      var ns = __webpack_require__.RetryOnError;
++/******/ 	      var retries = ns.retries[chunkId] || 0;
 +/******/
-+/******/ 	      if (retries >= RetryOnError.max) {
++/******/ 	      if (retries >= ns.max) {
 +/******/ 	        return result;
 +/******/ 	      }
 +/******/
-+/******/ 	      RetryOnError.cache[chunkId] = retries + 1;
++/******/ 	      ns.retries[chunkId] = retries + 1;
 +/******/
-+/******/ 	      return __webpack_require__.e(chunkId).then(function() {});
++/******/ 	      return Promise.resolve()
++/******/ 	        .then(function() {
++/******/ 	          return __webpack_require__.e(chunkId);
++/******/ 	        })
++/******/ 	        .then(function() {}); // Resolve empty value
 +/******/ 	    }
 +/******/ 	  ]
 +/******/ 	    .reduce(function(promise, strategy) {
@@ -29,7 +102,13 @@ exports[`RetryOnError should configure retry: runtime.js 1`] = `
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
 @@ Change 2 @@
-+/******/ 	var RetryOnError = { max: (2 || 1), cache: {} };
++/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/
++/******/ 	            var ns = __webpack_require__.RetryOnError;
++/******/ 	            ns.max = ns.max || (2 || 0);
++/******/ 	            ns.retries = ns.retries || {};
++/******/ 	        
++/******/
 "
 `;
 
@@ -42,15 +121,20 @@ exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 -/******/ 	  return Promise.reject(originalError);
 +/******/ 	  return [
 +/******/ 	    function(installedChunks, chunkId, originalError, result) {
-+/******/ 	      var retries = RetryOnError.cache[chunkId] || 0;
++/******/ 	      var ns = __webpack_require__.RetryOnError;
++/******/ 	      var retries = ns.retries[chunkId] || 0;
 +/******/
-+/******/ 	      if (retries >= RetryOnError.max) {
++/******/ 	      if (retries >= ns.max) {
 +/******/ 	        return result;
 +/******/ 	      }
 +/******/
-+/******/ 	      RetryOnError.cache[chunkId] = retries + 1;
++/******/ 	      ns.retries[chunkId] = retries + 1;
 +/******/
-+/******/ 	      return __webpack_require__.e(chunkId).then(function() {});
++/******/ 	      return Promise.resolve()
++/******/ 	        .then(function() {
++/******/ 	          return __webpack_require__.e(chunkId);
++/******/ 	        })
++/******/ 	        .then(function() {}); // Resolve empty value
 +/******/ 	    }
 +/******/ 	  ]
 +/******/ 	    .reduce(function(promise, strategy) {
@@ -62,6 +146,12 @@ exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
 @@ Change 2 @@
-+/******/ 	var RetryOnError = { max: (1 || 1), cache: {} };
++/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/
++/******/ 	            var ns = __webpack_require__.RetryOnError;
++/******/ 	            ns.max = ns.max || (1 || 0);
++/******/ 	            ns.retries = ns.retries || {};
++/******/ 	        
++/******/
 "
 `;

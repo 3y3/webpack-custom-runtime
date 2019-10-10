@@ -4,13 +4,13 @@ const webpack = require('./webpack');
 const checkFsDiff = require('./check-fs-diff');
 const WebpackCustomRuntime = require('../../../').CustomRuntimePlugin;
 
-const base = webpack({
+const defaultBase = webpack({
     plugins: [
         new WebpackCustomRuntime({ behavior: '' }),
     ]
 });
 
-module.exports = function cit(name, currConfig) {
+module.exports = function cit(name, currConfig, base = defaultBase) {
     test(name, async function() {
         const curr = webpack(currConfig);
 
@@ -18,4 +18,8 @@ module.exports = function cit(name, currConfig) {
 
         checkFsDiff(base, curr);
     });
+};
+
+module.exports.base = function(config) {
+    return webpack(config);
 };

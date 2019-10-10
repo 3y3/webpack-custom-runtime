@@ -5,13 +5,13 @@ const WebpackCustomRuntime = require('../../').CustomRuntimePlugin;
 
 describe('RetryOnError', function() {
 
-    function cit(name, plugins = []) {
+    function cit(name, plugins = [], base) {
         cct(name, {
             plugins: [
                 new WebpackCustomRuntime({ behavior: '' }),
                 ...plugins
             ]
-        });
+        }, base);
     }
 
     cit('should setup default retry', [
@@ -29,4 +29,38 @@ describe('RetryOnError', function() {
             enabled: false
         })
     ]);
+
+    describe('should configure namespace', function() {
+
+        const base = cct.base({
+            plugins: [
+                new WebpackCustomRuntime({ behavior: '' }),
+                new WebpackCustomRuntime.ErrorHandler.RetryOnError()
+            ]
+        });
+
+        cit('top level case', [
+            new WebpackCustomRuntime.ErrorHandler.RetryOnError({
+                namespace: '__NS__'
+            })
+        ], base);
+
+        cit('brackets case', [
+            new WebpackCustomRuntime.ErrorHandler.RetryOnError({
+                namespace: 'window["__NS__"]'
+            })
+        ], base);
+
+        cit('dot case', [
+            new WebpackCustomRuntime.ErrorHandler.RetryOnError({
+                namespace: 'Ya.__NS__'
+            })
+        ], base);
+
+        cit('requireFn case', [
+            new WebpackCustomRuntime.ErrorHandler.RetryOnError({
+                namespace: '{requireFn}.__NS__'
+            })
+        ], base);
+    });
 });
