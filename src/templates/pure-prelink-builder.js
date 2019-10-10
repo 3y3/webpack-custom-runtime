@@ -6,21 +6,21 @@
  * This is a pure function. It can be converted to string and called in any place.
  * So all that it requires should be defined inside or passed in params.
  */
-module.exports = function preloadBuilder(
+module.exports = function prelinkBuilder(
     installedChunks,
     chunkId,
     scriptUrlResolver,
     scriptOptionsResolver
 ) {
     var link = document.createElement('link');
-    var url = scriptUrlResolver(installedChunks, chunkId, 'preload');
+    var url = scriptUrlResolver(installedChunks, chunkId, '{linkType}');
     var options = extend({
         // most compatible type
         type: 'text/javascript',
         charset: 'utf-8',
-        rel: 'preload',
+        rel: '{linkType}',
         as: 'script'
-    }, scriptOptionsResolver(installedChunks, chunkId, url, 'preload'));
+    }, scriptOptionsResolver(installedChunks, chunkId, url, '{linkType}'));
 
     extend(link, options);
 

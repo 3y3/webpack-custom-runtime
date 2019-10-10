@@ -6,9 +6,6 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config:
 --- runtime.js	
 +++ runtime.js	
 @@ Change 1 @@
--/******/
-+/******/ 					link.crossOrigin = \\"anonymous\\";
-@@ Change 2 @@
 +/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
 +/******/ 	    result.crossOrigin = 'anonymous';
 +/******/ 	  }

@@ -1,8 +1,9 @@
 'use strict';
 
 const pureScriptBuilder = require('./templates/pure-script-builder');
-const purePreloadBuilder = require('./templates/pure-preload-builder');
+const purePrelinkBuilder = require('./templates/pure-prelink-builder');
 const pureRequireEnsure = require('./templates/pure-require-ensure');
+const replaceEnv = require('./utils/replace-env');
 const zip = require('./utils/array-to-hash');
 const format = require('./utils/format-code');
 const { pluginName, expressions, requireEnsureBaseVars, requireEnsureVars } = require('./config');
@@ -145,10 +146,24 @@ module.exports = {
         mainTemplate.hooks.linkPreload.tap(`${pluginName} preload`, (source, chunk) => {
             const customCallArgs = requireEnsureBaseVars.join(', ');
             const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
-            const preload = purePreloadBuilder.toString();
+            const preload = replaceEnv(purePrelinkBuilder.toString(), {
+                linkType: 'preload'
+            });
 
             return format(`
                 var link = (${preload})(${callArgs});
+            `);
+        });
+
+        mainTemplate.hooks.linkPrefetch.tap(`${pluginName} prefetch`, (source, chunk) => {
+            const customCallArgs = requireEnsureBaseVars.join(', ');
+            const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
+            const prefetch = replaceEnv(purePrelinkBuilder.toString(), {
+                linkType: 'prefetch'
+            });
+
+            return format(`
+                var link = (${prefetch})(${callArgs});
             `);
         });
     },

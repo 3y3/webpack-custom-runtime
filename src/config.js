@@ -46,6 +46,9 @@ module.exports = {
         ],
         linkPreload: [
             'JsonpMainTemplatePlugin'
+        ],
+        linkPrefetch: [
+            'JsonpMainTemplatePlugin'
         ]
     },
 
