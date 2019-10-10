@@ -30,6 +30,12 @@ describe('RetryOnError', function() {
         })
     ]);
 
+    cit('should configure waitOnline', [
+        new WebpackCustomRuntime.ErrorHandler.RetryOnError({
+            waitOnline: true
+        })
+    ]);
+
     describe('should configure namespace', function() {
 
         const base = cct.base({

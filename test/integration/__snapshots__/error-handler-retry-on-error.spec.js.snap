@@ -112,6 +112,65 @@ exports[`RetryOnError should configure retry: runtime.js 1`] = `
 "
 `;
 
+exports[`RetryOnError should configure waitOnline: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	  return Promise.reject(originalError);
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, originalError, result) {
++/******/ 	      var ns = __webpack_require__.RetryOnError;
++/******/ 	      var retries = ns.retries[chunkId] || 0;
++/******/
++/******/ 	      if (retries >= ns.max) {
++/******/ 	        return result;
++/******/ 	      }
++/******/
++/******/ 	      ns.retries[chunkId] = retries + 1;
++/******/
++/******/ 	      return ns
++/******/ 	        .waitOnline()
++/******/ 	        .then(function() {
++/******/ 	          return __webpack_require__.e(chunkId);
++/******/ 	        })
++/******/ 	        .then(function() {}); // Resolve empty value
++/******/ 	    }
++/******/ 	  ]
++/******/ 	    .reduce(function(promise, strategy) {
++/******/ 	      return promise.then(function(result) {
++/******/ 	        return strategy(installedChunks, chunkId, originalError, result);
++/******/ 	      });
++/******/ 	    }, Promise.resolve(originalError))
++/******/ 	    .then(function(result) {
++/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
++/******/ 	    });
+@@ Change 2 @@
++/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/
++/******/ 	            var ns = __webpack_require__.RetryOnError;
++/******/ 	            ns.max = ns.max || (1 || 0);
++/******/ 	            ns.retries = ns.retries || {};
++/******/ 	        
++/******/
++/******/ 	                ns.waitOnline = function() {
++/******/ 	                    return new Promise(function(resolve) {
++/******/ 	                        if (navigator.onLine) {
++/******/ 	                            resolve();
++/******/ 	                        } else {
++/******/ 	                            window.addEventListener('online', function onOnline() {
++/******/ 	                                window.removeEventListener('online', onOnline);
++/******/ 	                                resolve();
++/******/ 	                            });
++/******/ 	                        }
++/******/ 	                    });
++/******/ 	                };
++/******/ 	            
++/******/
+"
+`;
+
 exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 "Index: runtime.js
 ===================================================================

@@ -9,6 +9,7 @@ class RetryOnError extends ErrorHandler {
         super('RetryOnError', Object.assign({
             enabled: true,
             namespace: '{requireFn}.RetryOnError',
+            waitOnline: false,
             maxRetryCount: 1
         }, options));
     }
@@ -38,21 +39,41 @@ class RetryOnError extends ErrorHandler {
         return {
             ns: namespace,
             requireFn: mainTemplate.requireFn,
+            waitOnline: this.options.waitOnline,
             maxRetryCount: this.options.maxRetryCount
         };
     }
 
-    localVarsResolver({ ns }, chunk, hash) {
-        return `
+    localVarsResolver({ ns, waitOnline }, chunk, hash) {
+        const result = [`
             ${ns} = ${ns} || {};
 
             var ns = ${ns};
             ns.max = ns.max || (${this.options.maxRetryCount} || 0);
             ns.retries = ns.retries || {};
-        `;
+        `];
+
+        if (waitOnline) {
+            result.push(`
+                ns.waitOnline = function() {
+                    return new Promise(function(resolve) {
+                        if (navigator.onLine) {
+                            resolve();
+                        } else {
+                            window.addEventListener('online', function onOnline() {
+                                window.removeEventListener('online', onOnline);
+                                resolve();
+                            });
+                        }
+                    });
+                };
+            `);
+        }
+
+        return result.join('\n');
     }
 
-    codeResolver({ ns, requireFn }, chunk, hash, { chunkId, originalError, result }) {
+    codeResolver({ ns, requireFn, waitOnline }, chunk, hash, { chunkId, originalError, result }) {
         return `
             var ns = ${ns};
             var retries = ns.retries[${chunkId}] || 0;
@@ -63,7 +84,7 @@ class RetryOnError extends ErrorHandler {
             
             ns.retries[${chunkId}] = retries + 1;
             
-            return Promise.resolve()
+            return ${ waitOnline ? `ns.waitOnline()` : 'Promise.resolve()' }
                 .then(function() { return ${requireFn}.e(${chunkId}); })
                 .then(function() {}); // Resolve empty value
         `;
