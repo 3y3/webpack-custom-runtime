@@ -6,7 +6,16 @@ exports[`ScriptAttr(Timeout) should not to override script timeout by default: r
 --- runtime.js	
 +++ runtime.js	
 @@ Change 1 @@
-+/******/ 	  result.timeout = 120;
+-/******/ 	  return {};
++/******/ 	  mode = mode || 'load';
++/******/
++/******/ 	  var result = {};
++/******/
++/******/ 	  (function() {
++/******/ 	    result.timeout = 120;
++/******/ 	  })();
++/******/
++/******/ 	  return result;
 "
 `;
 
@@ -16,7 +25,16 @@ exports[`ScriptAttr(Timeout) should override script timeout from config: runtime
 --- runtime.js	
 +++ runtime.js	
 @@ Change 1 @@
-+/******/ 	  result.timeout = 60;
+-/******/ 	  return {};
++/******/ 	  mode = mode || 'load';
++/******/
++/******/ 	  var result = {};
++/******/
++/******/ 	  (function() {
++/******/ 	    result.timeout = 60;
++/******/ 	  })();
++/******/
++/******/ 	  return result;
 "
 `;
 
@@ -26,6 +44,15 @@ exports[`ScriptAttr(Timeout) should override script timeout from options: runtim
 --- runtime.js	
 +++ runtime.js	
 @@ Change 1 @@
-+/******/ 	  result.timeout = 50;
+-/******/ 	  return {};
++/******/ 	  mode = mode || 'load';
++/******/
++/******/ 	  var result = {};
++/******/
++/******/ 	  (function() {
++/******/ 	    result.timeout = 50;
++/******/ 	  })();
++/******/
++/******/ 	  return result;
 "
 `;

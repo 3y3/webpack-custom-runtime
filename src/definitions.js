@@ -31,11 +31,28 @@ module.exports = {
                 { installedChunks, chunkId, originalUrl, result, mode }
             );
 
+            if (!strategies.length) {
+                return format(`function ${scriptUrlResolver}(${installedChunks}, ${chunkId}) {
+                    return jsonpScriptSrc(${chunkId});         
+                }`);
+            }
+
+            const wrappedStrategies = strategies.map((strategy) => {
+                if (typeof strategy === 'function') {
+                    return strategy.toString();
+                } else {
+                    return `function() {
+                        ${strategy}
+                    }`;
+                }
+            });
+
             return format(`function ${scriptUrlResolver}(${installedChunks}, ${chunkId}, ${mode}) {
-                var ${result} = ${originalUrl} = jsonpScriptSrc(${chunkId});
-                
                 ${mode} = ${mode} || 'load';
-                ${strategies.join('\n')}
+
+                var ${result} = ${originalUrl} = jsonpScriptSrc(${chunkId});                
+                
+                ${wrappedStrategies.map((strategy) => `${result} = (${strategy})();`).join('\n')}
                 
                 return ${result};         
             }`);
@@ -51,11 +68,28 @@ module.exports = {
                 { installedChunks, chunkId, url, result, mode }
             );
 
+            if (!strategies.length) {
+                return format(`function ${scriptOptionsResolver}(${installedChunks}, ${chunkId}, ${url}, ${mode}) {
+                    return {};         
+                }`);
+            }
+
+            const wrappedStrategies = strategies.map((strategy) => {
+                if (typeof strategy === 'function') {
+                    return strategy.toString();
+                } else {
+                    return `function() {
+                        ${strategy}
+                    }`;
+                }
+            });
+
             return format(`function ${scriptOptionsResolver}(${installedChunks}, ${chunkId}, ${url}, ${mode}) {
+                ${mode} = ${mode} || 'load';
+                
                 var ${result} = {};
                 
-                ${mode} = ${mode} || 'load';
-                ${strategies.join('\n')}
+                ${wrappedStrategies.map((strategy) => `(${strategy})();`).join('\n')}
 
                 return ${result};         
             }`);
@@ -109,12 +143,12 @@ module.exports = {
                         : Promise.resolve();
                 })`;
 
+            const processor = strategies.length
+                ? strategyProcessor
+                : `Promise.reject(${originalError})`;
+
             return format(`function ${scriptErrorHandler}(${installedChunks}, ${chunkId}, ${originalError}) {
-                return ${
-                strategies.length
-                    ? strategyProcessor
-                    : `Promise.reject(${originalError})`
-                };
+                return ${processor};
             }`);
         });
     },

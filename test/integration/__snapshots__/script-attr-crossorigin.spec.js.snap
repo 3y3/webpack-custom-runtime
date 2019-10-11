@@ -6,9 +6,18 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from config:
 --- runtime.js	
 +++ runtime.js	
 @@ Change 1 @@
-+/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
-+/******/ 	    result.crossOrigin = 'anonymous';
-+/******/ 	  }
+-/******/ 	  return {};
++/******/ 	  mode = mode || 'load';
++/******/
++/******/ 	  var result = {};
++/******/
++/******/ 	  (function() {
++/******/ 	    if (url.indexOf(window.location.origin + '/') !== 0) {
++/******/ 	      result.crossOrigin = 'anonymous';
++/******/ 	    }
++/******/ 	  })();
++/******/
++/******/ 	  return result;
 "
 `;
 
@@ -18,8 +27,17 @@ exports[`ScriptAttr(CrossOrigin) should override script crossorigin from options
 --- runtime.js	
 +++ runtime.js	
 @@ Change 1 @@
-+/******/ 	  if (url.indexOf(window.location.origin + '/') !== 0) {
-+/******/ 	    result.crossOrigin = 'with-credentials';
-+/******/ 	  }
+-/******/ 	  return {};
++/******/ 	  mode = mode || 'load';
++/******/
++/******/ 	  var result = {};
++/******/
++/******/ 	  (function() {
++/******/ 	    if (url.indexOf(window.location.origin + '/') !== 0) {
++/******/ 	      result.crossOrigin = 'with-credentials';
++/******/ 	    }
++/******/ 	  })();
++/******/
++/******/ 	  return result;
 "
 `;

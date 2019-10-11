@@ -1,5 +1,7 @@
 'use strict';
 
+const format = require('../utils/format-code');
+
 class BasePlugin {
 
     constructor(name, options, strategyConsumer) {
@@ -26,7 +28,7 @@ class BasePlugin {
                     const code = this.localVarsResolver(options, chunk, hash);
 
                     if (code) {
-                        source += '\n' + code;
+                        source += '\n' + format(code);
                     }
 
                     return source;

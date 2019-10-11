@@ -23,9 +23,7 @@ class RetryOnError extends ErrorHandler {
             namespace = 'window.' + namespace;
         }
 
-        return namespace
-            .replace(/\["/g, '[\'')
-            .replace(/"\]/g, '\']');
+        return namespace;
     }
 
     optionsResolver(compilation) {

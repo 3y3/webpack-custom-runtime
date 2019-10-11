@@ -9,11 +9,11 @@ exports[`RetryOnError should configure namespace brackets case: runtime.js 1`] =
 -/******/ 	      var ns = __webpack_require__.RetryOnError;
 +/******/ 	      var ns = window['__NS__'];
 @@ Change 2 @@
--/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
-+/******/ 	            window['__NS__'] = window['__NS__'] || {};
+-/******/ 	__webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	window['__NS__'] = window['__NS__'] || {};
 @@ Change 3 @@
--/******/ 	            var ns = __webpack_require__.RetryOnError;
-+/******/ 	            var ns = window['__NS__'];
+-/******/ 	var ns = __webpack_require__.RetryOnError;
++/******/ 	var ns = window['__NS__'];
 "
 `;
 
@@ -26,11 +26,11 @@ exports[`RetryOnError should configure namespace dot case: runtime.js 1`] = `
 -/******/ 	      var ns = __webpack_require__.RetryOnError;
 +/******/ 	      var ns = Ya.__NS__;
 @@ Change 2 @@
--/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
-+/******/ 	            Ya.__NS__ = Ya.__NS__ || {};
+-/******/ 	__webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	Ya.__NS__ = Ya.__NS__ || {};
 @@ Change 3 @@
--/******/ 	            var ns = __webpack_require__.RetryOnError;
-+/******/ 	            var ns = Ya.__NS__;
+-/******/ 	var ns = __webpack_require__.RetryOnError;
++/******/ 	var ns = Ya.__NS__;
 "
 `;
 
@@ -43,11 +43,11 @@ exports[`RetryOnError should configure namespace requireFn case: runtime.js 1`] 
 -/******/ 	      var ns = __webpack_require__.RetryOnError;
 +/******/ 	      var ns = __webpack_require__.__NS__;
 @@ Change 2 @@
--/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
-+/******/ 	            __webpack_require__.__NS__ = __webpack_require__.__NS__ || {};
+-/******/ 	__webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	__webpack_require__.__NS__ = __webpack_require__.__NS__ || {};
 @@ Change 3 @@
--/******/ 	            var ns = __webpack_require__.RetryOnError;
-+/******/ 	            var ns = __webpack_require__.__NS__;
+-/******/ 	var ns = __webpack_require__.RetryOnError;
++/******/ 	var ns = __webpack_require__.__NS__;
 "
 `;
 
@@ -60,11 +60,11 @@ exports[`RetryOnError should configure namespace top level case: runtime.js 1`] 
 -/******/ 	      var ns = __webpack_require__.RetryOnError;
 +/******/ 	      var ns = window.__NS__;
 @@ Change 2 @@
--/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
-+/******/ 	            window.__NS__ = window.__NS__ || {};
+-/******/ 	__webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	window.__NS__ = window.__NS__ || {};
 @@ Change 3 @@
--/******/ 	            var ns = __webpack_require__.RetryOnError;
-+/******/ 	            var ns = window.__NS__;
+-/******/ 	var ns = __webpack_require__.RetryOnError;
++/******/ 	var ns = window.__NS__;
 "
 `;
 
@@ -74,8 +74,8 @@ exports[`RetryOnError should configure retry: runtime.js 1`] = `
 --- runtime.js	
 +++ runtime.js	
 @@ Change 1 @@
--/******/ 	            ns.max = ns.max || (1 || 0);
-+/******/ 	            ns.max = ns.max || (2 || 0);
+-/******/ 	ns.max = ns.max || (1 || 0);
++/******/ 	ns.max = ns.max || (2 || 0);
 "
 `;
 
@@ -89,19 +89,19 @@ exports[`RetryOnError should configure waitOnline: runtime.js 1`] = `
 +/******/ 	      return ns
 +/******/ 	        .waitOnline()
 @@ Change 2 @@
-+/******/ 	                ns.waitOnline = function() {
-+/******/ 	                    return new Promise(function(resolve) {
-+/******/ 	                        if (navigator.onLine) {
-+/******/ 	                            resolve();
-+/******/ 	                        } else {
-+/******/ 	                            window.addEventListener('online', function onOnline() {
-+/******/ 	                                window.removeEventListener('online', onOnline);
-+/******/ 	                                resolve();
-+/******/ 	                            });
-+/******/ 	                        }
-+/******/ 	                    });
-+/******/ 	                };
-+/******/ 	            
++/******/ 	ns.waitOnline = function() {
++/******/ 	  return new Promise(function(resolve) {
++/******/ 	    if (navigator.onLine) {
++/******/ 	      resolve();
++/******/ 	    } else {
++/******/ 	      window.addEventListener('online', function onOnline() {
++/******/ 	        window.removeEventListener('online', onOnline);
++/******/ 	        resolve();
++/******/ 	      });
++/******/ 	    }
++/******/ 	  });
++/******/ 	};
+@@ Change 3 @@
 +/******/
 "
 `;
@@ -140,12 +140,12 @@ exports[`RetryOnError should setup default retry: runtime.js 1`] = `
 +/******/ 	      return result ? Promise.reject(result) : Promise.resolve();
 +/******/ 	    });
 @@ Change 2 @@
-+/******/ 	            __webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
++/******/ 	__webpack_require__.RetryOnError = __webpack_require__.RetryOnError || {};
+@@ Change 3 @@
++/******/ 	var ns = __webpack_require__.RetryOnError;
++/******/ 	ns.max = ns.max || (1 || 0);
++/******/ 	ns.retries = ns.retries || {};
 +/******/
-+/******/ 	            var ns = __webpack_require__.RetryOnError;
-+/******/ 	            ns.max = ns.max || (1 || 0);
-+/******/ 	            ns.retries = ns.retries || {};
-+/******/ 	        
 +/******/
 "
 `;
