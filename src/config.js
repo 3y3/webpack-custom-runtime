@@ -17,6 +17,7 @@ module.exports = {
     pluginName: 'CustomRuntimePlugin',
 
     expressions: Object.assign({
+        requireEnsure: 'pureRequireEnsure',
         installedChunks: 'installedChunks',
         chunkId: 'chunkId',
         result: 'result',

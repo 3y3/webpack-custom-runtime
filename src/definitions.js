@@ -9,6 +9,7 @@ const format = require('./utils/format-code');
 const { pluginName, expressions, requireEnsureBaseVars, requireEnsureVars } = require('./config');
 
 const {
+    requireEnsure,
     scriptUrlResolver,
     scriptOptionsResolver,
     scriptLoadHandler,
@@ -161,12 +162,19 @@ module.exports = {
             return [ source, format(prepareEnv) ].join('\n');
         });
 
+        mainTemplate.hooks.localVars.tap(pluginName, (source, chunk, hash) => {
+            const result = format(`
+                var ${requireEnsure} = ${pureRequireEnsure.toString()};
+            `);
+
+            return [ source, result ].join('\n');
+        });
+
         mainTemplate.hooks.requireEnsure.tap(`${pluginName} load`, (source) => {
             const customCallArgs = requireEnsureVars.join(', ');
             const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
-            const ensure = pureRequireEnsure.toString();
             const result = format(`
-                var result = (${ensure})(${callArgs});
+                var result = (${requireEnsure})(${callArgs});
 
                 if (result) {
                     promises.push.apply(promises, [].concat(result));
