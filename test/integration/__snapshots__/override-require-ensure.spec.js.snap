@@ -48,7 +48,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 					  }
 +/******/ 					})(installedChunks, chunkId, scriptUrlResolver, scriptOptionsResolver);
 @@ Change 3 @@
-+/******/ 	function scriptUrlResolver(installedChunks, chunkId) {
++/******/ 	function scriptUrlResolver(installedChunks, chunkId, mode) {
 +/******/ 	  return jsonpScriptSrc(chunkId);
 +/******/ 	}
 @@ Change 4 @@
@@ -420,7 +420,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 					  }
 +/******/ 					})(installedChunks, chunkId, scriptUrlResolver, scriptOptionsResolver);
 @@ Change 3 @@
-+/******/ 	function scriptUrlResolver(installedChunks, chunkId) {
++/******/ 	function scriptUrlResolver(installedChunks, chunkId, mode) {
 +/******/ 	  return jsonpScriptSrc(chunkId);
 +/******/ 	}
 @@ Change 4 @@

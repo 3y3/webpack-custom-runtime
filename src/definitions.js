@@ -15,6 +15,24 @@ const {
     scriptErrorHandler
 } = expressions;
 
+function wrapStrategy(strategy, args = '') {
+    if (typeof strategy === 'function') {
+        return strategy.toString();
+    } else {
+        return `function(${args}) {
+            ${strategy}
+        }`;
+    }
+}
+
+function wrapSyncStrategy(strategy) {
+    if (typeof strategy === 'function') {
+        return strategy.toString();
+    } else {
+        return `(${wrapStrategy(strategy)})();`;
+    }
+}
+
 module.exports = {
     scriptBuilder(mainTemplate) {
         mainTemplate.hooks.scriptBuilder.tap(pluginName, () => {
@@ -31,30 +49,23 @@ module.exports = {
                 { installedChunks, chunkId, originalUrl, result, mode }
             );
 
-            if (!strategies.length) {
-                return format(`function ${scriptUrlResolver}(${installedChunks}, ${chunkId}) {
-                    return jsonpScriptSrc(${chunkId});         
-                }`);
-            }
+            const args = `${installedChunks}, ${chunkId}, ${mode}`;
+            const wrappedStrategies = strategies.map(wrapSyncStrategy);
 
-            const wrappedStrategies = strategies.map((strategy) => {
-                if (typeof strategy === 'function') {
-                    return strategy.toString();
-                } else {
-                    return `function() {
-                        ${strategy}
-                    }`;
-                }
-            });
+            const processor = wrappedStrategies.length
+                ? `
+                    ${mode} = ${mode} || 'load';
+    
+                    var ${result} = ${originalUrl} = jsonpScriptSrc(${chunkId});                
+                    
+                    ${wrappedStrategies.join('\n')}
+                    
+                    return ${result};
+                `
+                : `return jsonpScriptSrc(${chunkId});`;
 
-            return format(`function ${scriptUrlResolver}(${installedChunks}, ${chunkId}, ${mode}) {
-                ${mode} = ${mode} || 'load';
-
-                var ${result} = ${originalUrl} = jsonpScriptSrc(${chunkId});                
-                
-                ${wrappedStrategies.map((strategy) => `${result} = (${strategy})();`).join('\n')}
-                
-                return ${result};         
+            return format(`function ${scriptUrlResolver}(${args}) {
+                ${processor}
             }`);
         });
     },
@@ -68,30 +79,23 @@ module.exports = {
                 { installedChunks, chunkId, url, result, mode }
             );
 
-            if (!strategies.length) {
-                return format(`function ${scriptOptionsResolver}(${installedChunks}, ${chunkId}, ${url}, ${mode}) {
-                    return {};         
-                }`);
-            }
+            const args = `${installedChunks}, ${chunkId}, ${url}, ${mode}`;
+            const wrappedStrategies = strategies.map(wrapSyncStrategy);
 
-            const wrappedStrategies = strategies.map((strategy) => {
-                if (typeof strategy === 'function') {
-                    return strategy.toString();
-                } else {
-                    return `function() {
-                        ${strategy}
-                    }`;
-                }
-            });
+            const processor = wrappedStrategies.length
+                ? `
+                    ${mode} = ${mode} || 'load';
+    
+                    var ${result} = {};     
+                    
+                    ${wrappedStrategies.join('\n')}
+                    
+                    return ${result};
+                `
+                : 'return {};';
 
-            return format(`function ${scriptOptionsResolver}(${installedChunks}, ${chunkId}, ${url}, ${mode}) {
-                ${mode} = ${mode} || 'load';
-                
-                var ${result} = {};
-                
-                ${wrappedStrategies.map((strategy) => `(${strategy})();`).join('\n')}
-
-                return ${result};         
+            return format(`function ${scriptOptionsResolver}(${args}) {
+                ${processor}
             }`);
         });
     },
@@ -124,18 +128,13 @@ module.exports = {
                 { installedChunks, chunkId, originalError, result }
             );
 
-            const wrappedStrategies = strategies.map((strategy) => {
-                if (typeof strategy === 'function') {
-                    return strategy.toString();
-                } else {
-                    return `function(${installedChunks}, ${chunkId}, ${originalError}, ${result}) {${strategy}}`;
-                }
-            });
+            const args = `${installedChunks}, ${chunkId}, ${originalError}, ${result}`;
+            const wrappedStrategies = strategies.map((strategy) => wrapStrategy(strategy, args));
 
             const strategyProcessor = `[${wrappedStrategies.join(',')}]
                 .reduce(function(promise, strategy) {
                     return promise.then(function(${result}) {
-                        return strategy(${installedChunks}, ${chunkId}, ${originalError}, ${result});
+                        return strategy(${args});
                     });
                 }, Promise.resolve(${originalError})).then(function(${result}) {
                     return ${result}
@@ -177,29 +176,35 @@ module.exports = {
             return [ source, result ].join('\n');
         });
 
-        mainTemplate.hooks.linkPreload.tap(`${pluginName} preload`, (source, chunk) => {
-            const customCallArgs = requireEnsureBaseVars.join(', ');
-            const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
-            const preload = replaceEnv(purePrelinkBuilder.toString(), {
-                linkType: 'preload'
+        // WebpackHtmlPlugin has no linkPreload tapable
+        if (mainTemplate.hooks.linkPreload) {
+            mainTemplate.hooks.linkPreload.tap(`${pluginName} preload`, () => {
+                const customCallArgs = requireEnsureBaseVars.join(', ');
+                const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
+                const preload = replaceEnv(purePrelinkBuilder.toString(), {
+                    linkType: 'preload'
+                });
+
+                return format(`
+                    var link = (${preload})(${callArgs});
+                `);
             });
+        }
 
-            return format(`
-                var link = (${preload})(${callArgs});
-            `);
-        });
+        // WebpackHtmlPlugin has no linkPrefetch tapable
+        if (mainTemplate.hooks.linkPrefetch) {
+            mainTemplate.hooks.linkPrefetch.tap(`${pluginName} prefetch`, () => {
+                const customCallArgs = requireEnsureBaseVars.join(', ');
+                const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
+                const prefetch = replaceEnv(purePrelinkBuilder.toString(), {
+                    linkType: 'prefetch'
+                });
 
-        mainTemplate.hooks.linkPrefetch.tap(`${pluginName} prefetch`, (source, chunk) => {
-            const customCallArgs = requireEnsureBaseVars.join(', ');
-            const callArgs = `installedChunks, chunkId, ${customCallArgs}`;
-            const prefetch = replaceEnv(purePrelinkBuilder.toString(), {
-                linkType: 'prefetch'
+                return format(`
+                    var link = (${prefetch})(${callArgs});
+                `);
             });
-
-            return format(`
-                var link = (${prefetch})(${callArgs});
-            `);
-        });
+        }
     },
 
     localFunction(mainTemplate, varName) {

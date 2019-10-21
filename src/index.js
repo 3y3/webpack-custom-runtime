@@ -17,6 +17,11 @@ class CustomRuntimePlugin {
             const { mainTemplate } = compilation;
 
             Object.keys(pluginsToMute).forEach((hookName) => {
+                // fix for HtmlWebpackPlugin
+                if (!mainTemplate.hooks[hookName]) {
+                    return;
+                }
+
                 this.mutePlugins(mainTemplate.hooks[hookName], pluginsToMute[hookName]);
             });
 
