@@ -1,7 +1,7 @@
 'use strict';
 
 const ErrorHandler = require('.');
-const replaceEnv = require('../../utils/replace-env');
+const resolveNamespace = require('../../utils/resolve-namespace');
 
 class RetryOnError extends ErrorHandler {
 
@@ -13,24 +13,11 @@ class RetryOnError extends ErrorHandler {
         }, options));
     }
 
-    resolveNamespace(mainTemplate) {
-        let namespace = replaceEnv(this.options.namespace, {
-            requireFn: mainTemplate.requireFn
-        });
-
-        if (!namespace.match(/.*?\..*?|.*?\[.*?\]/)) {
-            namespace = 'window.' + namespace;
-        }
-
-        return namespace;
-    }
-
     optionsResolver(compilation) {
         const { mainTemplate } = compilation;
-        const namespace = this.resolveNamespace(mainTemplate);
 
         return {
-            ns: namespace,
+            ns: resolveNamespace(this.options, mainTemplate.requireFn),
             requireFn: mainTemplate.requireFn,
             waitOnline: this.options.waitOnline,
             maxRetryCount: this.options.maxRetryCount
