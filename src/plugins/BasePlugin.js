@@ -5,12 +5,18 @@ const format = require('../utils/format-code');
 class BasePlugin {
 
     constructor(name, options, strategyConsumer) {
-        this.options = options;
+        this.options = Object.assign({
+            enabled: true
+        }, options);
         this.pluginName = name;
         this.strategyConsumer = strategyConsumer;
     }
 
     apply(compiler) {
+        if (!this.options.enabled) {
+            return;
+        }
+
         compiler.hooks.compilation.tap(this.pluginName, compilation => {
             const { mainTemplate } = compilation;
 

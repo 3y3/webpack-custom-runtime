@@ -7,16 +7,11 @@ const ScriptAttr = require('.');
 class ScriptAttrIntegrity extends ScriptAttr {
     constructor(options = {}) {
         super('Integrity', Object.assign({
-            enabled: true,
             ssri: {}
         }, options));
     }
 
     optionsResolver(compilation) {
-        if (!this.options.enabled) {
-            return;
-        }
-
         return { integrityHash: 'integrityHash' };
     }
 

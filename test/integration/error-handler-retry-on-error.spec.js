@@ -37,12 +37,6 @@ describe('RetryOnError', function() {
         })
     ], base);
 
-    cit('should be disabled on `enabled: false`', [
-        new WebpackCustomRuntime.ErrorHandler.RetryOnError({
-            enabled: false
-        })
-    ]);
-
     describe('should configure namespace', function() {
 
         cit('top level case', [

@@ -7,7 +7,6 @@ class RetryOnError extends ErrorHandler {
 
     constructor(options) {
         super('RetryOnError', Object.assign({
-            enabled: true,
             namespace: '{requireFn}.RetryOnError',
             waitOnline: false,
             maxRetryCount: 1
@@ -27,10 +26,6 @@ class RetryOnError extends ErrorHandler {
     }
 
     optionsResolver(compilation) {
-        if (!this.options.enabled) {
-            return;
-        }
-
         const { mainTemplate } = compilation;
         const namespace = this.resolveNamespace(mainTemplate);
 
