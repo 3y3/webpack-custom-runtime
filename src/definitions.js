@@ -110,12 +110,22 @@ module.exports = {
                 { installedChunks, chunkId, result }
             );
 
-            return format(`function ${scriptLoadHandler}(${installedChunks}, ${chunkId}) {
-                var ${result} = null;
-                
-                ${strategies.join('\n')}
+            const args = `${installedChunks}, ${chunkId}, ${result}`;
+            const wrappedStrategies = strategies.map((strategy) => wrapStrategy(strategy, args));
 
-                return Promise.resolve(${result});         
+            const strategyProcessor = `[${wrappedStrategies.join(',')}]
+                .reduce(function(promise, strategy) {
+                    return promise.then(function(${result}) {
+                        return strategy(${args});
+                    });
+                }, Promise.resolve());`;
+
+            const processor = strategies.length
+                ? strategyProcessor
+                : `Promise.resolve()`;
+
+            return format(`function ${scriptLoadHandler}(${installedChunks}, ${chunkId}) {
+                return ${processor};         
             }`);
         });
     },

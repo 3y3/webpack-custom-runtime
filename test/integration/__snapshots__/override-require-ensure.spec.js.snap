@@ -151,9 +151,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	}
 +/******/
 +/******/ 	function scriptLoadHandler(installedChunks, chunkId) {
-+/******/ 	  var result = null;
-+/******/
-+/******/ 	  return Promise.resolve(result);
++/******/ 	  return Promise.resolve();
 +/******/ 	}
 +/******/
 +/******/ 	function scriptErrorHandler(installedChunks, chunkId, originalError) {
@@ -509,9 +507,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	}
 +/******/
 +/******/ 	function scriptLoadHandler(installedChunks, chunkId) {
-+/******/ 	  var result = null;
-+/******/
-+/******/ 	  return Promise.resolve(result);
++/******/ 	  return Promise.resolve();
 +/******/ 	}
 +/******/
 +/******/ 	function scriptErrorHandler(installedChunks, chunkId, originalError) {

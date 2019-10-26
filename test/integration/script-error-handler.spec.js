@@ -30,8 +30,6 @@ describe('scriptErrorHandler', function() {
         });
     }
 
-    cit('should reject original error, if there is no strategies');
-
     cit('should apply custom plain error handler', [
         new TestPlainErrorHandler()
     ]);
