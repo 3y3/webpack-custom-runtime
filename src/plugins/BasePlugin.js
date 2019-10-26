@@ -10,6 +10,7 @@ class BasePlugin {
         }, options);
         this.pluginName = name;
         this.strategyConsumer = strategyConsumer;
+        this.plugins = [];
     }
 
     apply(compiler) {
@@ -41,19 +42,25 @@ class BasePlugin {
                 }
             );
 
-            mainTemplate.hooks[this.strategyConsumer].tap(
-                this.pluginName,
-                (array, chunk, hash, expressions) => {
-                    const code = this.codeResolver(options, chunk, hash, expressions);
+            if (this.strategyConsumer) {
+                mainTemplate.hooks[this.strategyConsumer].tap(
+                    this.pluginName,
+                    (array, chunk, hash, expressions) => {
+                        const code = this.codeResolver(options, chunk, hash, expressions);
 
-                    if (code) {
-                        array.push(code);
+                        if (code) {
+                            array.push(code);
+                        }
+
+                        return array;
                     }
-
-                    return array;
-                }
-            );
+                );
+            }
         });
+
+        this.plugins.forEach((plugin) => {
+            plugin.apply(compiler);
+        })
     }
 
     /**
