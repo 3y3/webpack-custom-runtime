@@ -13,7 +13,8 @@ module.exports = function(
     scriptOptionsResolver,
     scriptBuilder,
     scriptLoadHandler,
-    scriptErrorHandler
+    scriptErrorHandler,
+    scriptLoadingHandler
 ) {
     // JSONP chunk loading for javascript
 
@@ -48,6 +49,7 @@ module.exports = function(
         .then(buildScript)
         .then(setScript)
         .then(appendScript)
+        .then(onLoading)
         .catch(installedChunkData[PROMISE_REJECT]);
 
     return installedChunkData[LOAD_PROMISE];
@@ -108,5 +110,9 @@ module.exports = function(
 
     function onError(error) {
         return scriptErrorHandler(installedChunks, chunkId, error);
+    }
+
+    function onLoading(script) {
+        return scriptLoadingHandler(installedChunks, chunkId, script);
     }
 };

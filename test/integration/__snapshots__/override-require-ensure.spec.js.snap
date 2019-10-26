@@ -158,6 +158,10 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	  return Promise.reject(originalError);
 +/******/ 	}
 +/******/
++/******/ 	function scriptLoadingHandler(installedChunks, chunkId, result) {
++/******/ 	  return Promise.resolve();
++/******/ 	}
++/******/
 +/******/ 	var pureRequireEnsure = function(
 +/******/ 	  installedChunks,
 +/******/ 	  chunkId,
@@ -165,7 +169,8 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	  scriptOptionsResolver,
 +/******/ 	  scriptBuilder,
 +/******/ 	  scriptLoadHandler,
-+/******/ 	  scriptErrorHandler
++/******/ 	  scriptErrorHandler,
++/******/ 	  scriptLoadingHandler
 +/******/ 	) {
 +/******/ 	  // JSONP chunk loading for javascript
 +/******/ 	  var INSTALLED = 0;
@@ -197,6 +202,7 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	    .then(buildScript)
 +/******/ 	    .then(setScript)
 +/******/ 	    .then(appendScript)
++/******/ 	    .then(onLoading)
 +/******/ 	    .catch(installedChunkData[PROMISE_REJECT]);
 +/******/ 	  return installedChunkData[LOAD_PROMISE];
 +/******/
@@ -261,6 +267,10 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 	  function onError(error) {
 +/******/ 	    return scriptErrorHandler(installedChunks, chunkId, error);
 +/******/ 	  }
++/******/
++/******/ 	  function onLoading(script) {
++/******/ 	    return scriptLoadingHandler(installedChunks, chunkId, script);
++/******/ 	  }
 +/******/ 	};
 +/******/
 +/******/
@@ -273,7 +283,8 @@ exports[`require-ensure override should implement default webpack behavior: runt
 +/******/ 		  scriptOptionsResolver,
 +/******/ 		  scriptBuilder,
 +/******/ 		  scriptLoadHandler,
-+/******/ 		  scriptErrorHandler
++/******/ 		  scriptErrorHandler,
++/******/ 		  scriptLoadingHandler
 +/******/ 		);
 @@ Change 6 @@
 -/******/ 		var installedChunkData = installedChunks[chunkId];
@@ -514,6 +525,10 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	  return Promise.reject(originalError);
 +/******/ 	}
 +/******/
++/******/ 	function scriptLoadingHandler(installedChunks, chunkId, result) {
++/******/ 	  return Promise.resolve();
++/******/ 	}
++/******/
 +/******/ 	var pureRequireEnsure = function(
 +/******/ 	  installedChunks,
 +/******/ 	  chunkId,
@@ -521,7 +536,8 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	  scriptOptionsResolver,
 +/******/ 	  scriptBuilder,
 +/******/ 	  scriptLoadHandler,
-+/******/ 	  scriptErrorHandler
++/******/ 	  scriptErrorHandler,
++/******/ 	  scriptLoadingHandler
 +/******/ 	) {
 +/******/ 	  // JSONP chunk loading for javascript
 +/******/ 	  var INSTALLED = 0;
@@ -553,6 +569,7 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	    .then(buildScript)
 +/******/ 	    .then(setScript)
 +/******/ 	    .then(appendScript)
++/******/ 	    .then(onLoading)
 +/******/ 	    .catch(installedChunkData[PROMISE_REJECT]);
 +/******/ 	  return installedChunkData[LOAD_PROMISE];
 +/******/
@@ -617,6 +634,10 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 	  function onError(error) {
 +/******/ 	    return scriptErrorHandler(installedChunks, chunkId, error);
 +/******/ 	  }
++/******/
++/******/ 	  function onLoading(script) {
++/******/ 	    return scriptLoadingHandler(installedChunks, chunkId, script);
++/******/ 	  }
 +/******/ 	};
 +/******/
 +/******/
@@ -629,7 +650,8 @@ exports[`require-ensure override should skip defaults on custom behavior: runtim
 +/******/ 		  scriptOptionsResolver,
 +/******/ 		  scriptBuilder,
 +/******/ 		  scriptLoadHandler,
-+/******/ 		  scriptErrorHandler
++/******/ 		  scriptErrorHandler,
++/******/ 		  scriptLoadingHandler
 +/******/ 		);
 @@ Change 6 @@
 -/******/ 		var installedChunkData = installedChunks[chunkId];

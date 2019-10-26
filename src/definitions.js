@@ -13,7 +13,8 @@ const {
     scriptUrlResolver,
     scriptOptionsResolver,
     scriptLoadHandler,
-    scriptErrorHandler
+    scriptErrorHandler,
+    scriptLoadingHandler
 } = expressions;
 
 function wrapStrategy(strategy, args = '') {
@@ -159,6 +160,35 @@ module.exports = {
 
             return format(`function ${scriptErrorHandler}(${installedChunks}, ${chunkId}, ${originalError}) {
                 return ${processor};
+            }`);
+        });
+    },
+
+    scriptLoadingHandler(mainTemplate) {
+        const { installedChunks, chunkId, result } = expressions;
+
+        mainTemplate.hooks.scriptLoadingHandler.tap(pluginName, (source, chunk, hash) => {
+            const strategies = mainTemplate.hooks.scriptLoadingHandlerStrategy.call(
+                [], chunk, hash,
+                { installedChunks, chunkId, result }
+            );
+
+            const args = `${installedChunks}, ${chunkId}, ${result}`;
+            const wrappedStrategies = strategies.map((strategy) => wrapStrategy(strategy, args));
+
+            const strategyProcessor = `[${wrappedStrategies.join(',')}]
+                .reduce(function(promise, strategy) {
+                    return promise.then(function(${result}) {
+                        return strategy(${args});
+                    });
+                }, Promise.resolve(${result}));`;
+
+            const processor = strategies.length
+                ? strategyProcessor
+                : `Promise.resolve()`;
+
+            return format(`function ${scriptLoadingHandler}(${installedChunks}, ${chunkId}, ${result}) {
+                return ${processor};         
             }`);
         });
     },

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scriptLoadingHandler should apply custom func loading handler: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	  return Promise.resolve();
++/******/ 	  return [
++/******/ 	    function(p1, p2, p3) {
++/******/ 	      console.log(p3);
++/******/ 	    }
++/******/ 	  ].reduce(function(promise, strategy) {
++/******/ 	    return promise.then(function(result) {
++/******/ 	      return strategy(installedChunks, chunkId, result);
++/******/ 	    });
++/******/ 	  }, Promise.resolve(result));
+"
+`;
+
+exports[`scriptLoadingHandler should apply custom plain loading handler: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	  return Promise.resolve();
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, result) {
++/******/ 	      console.log(result);
++/******/ 	    }
++/******/ 	  ].reduce(function(promise, strategy) {
++/******/ 	    return promise.then(function(result) {
++/******/ 	      return strategy(installedChunks, chunkId, result);
++/******/ 	    });
++/******/ 	  }, Promise.resolve(result));
+"
+`;
+
+exports[`scriptLoadingHandler should apply multy loading handlers: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	  return Promise.resolve();
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, result) {
++/******/ 	      console.log(result);
++/******/ 	    },
++/******/ 	    function(p1, p2, p3) {
++/******/ 	      console.log(p3);
++/******/ 	    }
++/******/ 	  ].reduce(function(promise, strategy) {
++/******/ 	    return promise.then(function(result) {
++/******/ 	      return strategy(installedChunks, chunkId, result);
++/******/ 	    });
++/******/ 	  }, Promise.resolve(result));
+"
+`;

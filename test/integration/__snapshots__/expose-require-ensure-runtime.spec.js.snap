@@ -77,12 +77,14 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in custom namesp
 +/******/ 	window.Ya['scriptBuilder'] = scriptBuilder;
 +/******/ 	window.Ya['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	window.Ya['scriptErrorHandler'] = scriptErrorHandler;
++/******/ 	window.Ya['scriptLoadingHandler'] = scriptLoadingHandler;
 @@ Change 2 @@
 +/******/ 		var scriptUrlResolver = window.Ya['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver = window.Ya['scriptOptionsResolver'];
 +/******/ 		var scriptBuilder = window.Ya['scriptBuilder'];
 +/******/ 		var scriptLoadHandler = window.Ya['scriptLoadHandler'];
 +/******/ 		var scriptErrorHandler = window.Ya['scriptErrorHandler'];
++/******/ 		var scriptLoadingHandler = window.Ya['scriptLoadingHandler'];
 "
 `;
 
@@ -98,6 +100,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default names
 +/******/ 	__webpack_require__.CustomRuntime['scriptBuilder'] = scriptBuilder;
 +/******/ 	__webpack_require__.CustomRuntime['scriptLoadHandler'] = scriptLoadHandler;
 +/******/ 	__webpack_require__.CustomRuntime['scriptErrorHandler'] = scriptErrorHandler;
++/******/ 	__webpack_require__.CustomRuntime['scriptLoadingHandler'] = scriptLoadingHandler;
 @@ Change 2 @@
 +/******/ 		var scriptUrlResolver = __webpack_require__.CustomRuntime['scriptUrlResolver'];
 +/******/ 		var scriptOptionsResolver =
@@ -106,5 +109,7 @@ exports[`ExposeRequireEnsureRuntimePlugin should expose runtime in default names
 +/******/ 		var scriptLoadHandler = __webpack_require__.CustomRuntime['scriptLoadHandler'];
 +/******/ 		var scriptErrorHandler =
 +/******/ 		  __webpack_require__.CustomRuntime['scriptErrorHandler'];
++/******/ 		var scriptLoadingHandler =
++/******/ 		  __webpack_require__.CustomRuntime['scriptLoadingHandler'];
 "
 `;

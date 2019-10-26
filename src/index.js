@@ -71,5 +71,6 @@ CustomRuntimePlugin.ExposeRequireEnsureRuntime = require('./plugins/ExposeRequir
 CustomRuntimePlugin.ScriptAttr = require('./plugins/ScriptAttr');
 CustomRuntimePlugin.ErrorHandler = require('./plugins/ErrorHandler');
 CustomRuntimePlugin.LoadHandler = require('./plugins/LoadHandler');
+CustomRuntimePlugin.LoadingHandler = require('./plugins/LoadingHandler');
 
 module.exports.CustomRuntimePlugin = CustomRuntimePlugin;

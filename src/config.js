@@ -10,7 +10,8 @@ const requireEnsureBaseVars = [
 const requireEnsureVars = requireEnsureBaseVars.concat([
     'scriptBuilder',
     'scriptLoadHandler',
-    'scriptErrorHandler'
+    'scriptErrorHandler',
+    'scriptLoadingHandler'
 ]);
 
 module.exports = {
@@ -33,11 +34,13 @@ module.exports = {
         scriptOptionsResolver: [ 'source', 'chunk', 'hash' ],
         scriptLoadHandler: [ 'source', 'chunk', 'hash' ],
         scriptErrorHandler: [ 'source', 'chunk', 'hash' ],
+        scriptLoadingHandler: [ 'source', 'chunk', 'hash' ],
 
         scriptUrlResolverStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
         scriptOptionsResolverStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
         scriptLoadHandlerStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
         scriptErrorHandlerStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
+        scriptLoadingHandlerStrategy: [ 'array', 'chunk', 'hash', 'expressions' ],
         requireEnsureVars: [ 'source', 'chunk', 'hash', 'expressions' ],
     },
 
