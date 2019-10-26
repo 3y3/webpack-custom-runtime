@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModuleTimings should configure timing function: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	  return Promise.resolve();
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, result) {
++/******/ 	      var ns = __webpack_require__.ModuleTimings;
++/******/
++/******/ 	      ns[chunkId] = ns[chunkId] || {};
++/******/ 	      ns[chunkId].loadingEnd = Date.now();
++/******/
++/******/ 	      return result;
++/******/ 	    }
++/******/ 	  ].reduce(function(promise, strategy) {
++/******/ 	    return promise.then(function(result) {
++/******/ 	      return strategy(installedChunks, chunkId, result);
++/******/ 	    });
++/******/ 	  }, Promise.resolve());
+@@ Change 2 @@
+-/******/ 	  return Promise.resolve();
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, result) {
++/******/ 	      var ns = __webpack_require__.ModuleTimings;
++/******/
++/******/ 	      ns[chunkId] = ns[chunkId] || {};
++/******/ 	      ns[chunkId].loadingStart = Date.now();
++/******/
++/******/ 	      return result;
++/******/ 	    }
++/******/ 	  ].reduce(function(promise, strategy) {
++/******/ 	    return promise.then(function(result) {
++/******/ 	      return strategy(installedChunks, chunkId, result);
++/******/ 	    });
++/******/ 	  }, Promise.resolve(result));
+@@ Change 3 @@
++/******/ 	__webpack_require__.ModuleTimings = __webpack_require__.ModuleTimings || {};
+@@ Change 4 @@
++/******/
+"
+`;
+
+exports[`ModuleTimings should setup default timings: runtime.js 1`] = `
+"Index: runtime.js
+===================================================================
+--- runtime.js	
++++ runtime.js	
+@@ Change 1 @@
+-/******/ 	  return Promise.resolve();
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, result) {
++/******/ 	      var ns = __webpack_require__.ModuleTimings;
++/******/
++/******/ 	      ns[chunkId] = ns[chunkId] || {};
++/******/ 	      ns[chunkId].loadingEnd = performance.now();
++/******/
++/******/ 	      return result;
++/******/ 	    }
++/******/ 	  ].reduce(function(promise, strategy) {
++/******/ 	    return promise.then(function(result) {
++/******/ 	      return strategy(installedChunks, chunkId, result);
++/******/ 	    });
++/******/ 	  }, Promise.resolve());
+@@ Change 2 @@
+-/******/ 	  return Promise.resolve();
++/******/ 	  return [
++/******/ 	    function(installedChunks, chunkId, result) {
++/******/ 	      var ns = __webpack_require__.ModuleTimings;
++/******/
++/******/ 	      ns[chunkId] = ns[chunkId] || {};
++/******/ 	      ns[chunkId].loadingStart = performance.now();
++/******/
++/******/ 	      return result;
++/******/ 	    }
++/******/ 	  ].reduce(function(promise, strategy) {
++/******/ 	    return promise.then(function(result) {
++/******/ 	      return strategy(installedChunks, chunkId, result);
++/******/ 	    });
++/******/ 	  }, Promise.resolve(result));
+@@ Change 3 @@
++/******/ 	__webpack_require__.ModuleTimings = __webpack_require__.ModuleTimings || {};
+@@ Change 4 @@
++/******/
+"
+`;
